@@ -1,0 +1,32 @@
+.formContainer {
+    width: 100%;
+    max-width: 640px;
+    margin: 4rem auto 2rem;
+    background: rgba(10, 10, 10, 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 0.75rem;
+    box-shadow:
+            0 30px 100px rgba(0, 0, 0, 1),
+            0 0 40px 5px rgba(245, 158, 11, 0.8);
+}
+
+@media (min-width: 768px) {
+    .formContainer {
+        padding: 3rem;
+    }
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .formGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

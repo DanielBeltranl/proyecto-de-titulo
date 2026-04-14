@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap');
+
+.top-navbar {
+  background: #131313;
+  color: #f59e0b;
+  font-family: 'Manrope', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  letter-spacing: -0.01em;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  width: 100%;
+}
+
+.top-navbar__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: #1b1b1b;
+  box-sizing: border-box;
+}
+
+.top-navbar__brand {
+  color: #e2e2e2;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+
+.top-navbar__links {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+}
+
+.top-navbar__link {
+  color: #d8c3ad;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.top-navbar__link:hover {
+  color: #ffc174;
+}
+
+.top-navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.top-navbar__icon-button {
+  color: #d8c3ad;
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  cursor: pointer;
+  transform: scale(0.95);
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.top-navbar__icon-button svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  fill: currentColor;
+}
+
+.top-navbar__icon-button:hover {
+  color: #f59e0b;
+}
+
+.top-navbar__icon-button:active {
+  opacity: 0.8;
+}
+
+.top-navbar__icon-button:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+.top-navbar__avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #2d2d2d;
+  flex-shrink: 0;
+}
+
+.top-navbar__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .top-navbar__links {
+    display: flex;
+  }
+}

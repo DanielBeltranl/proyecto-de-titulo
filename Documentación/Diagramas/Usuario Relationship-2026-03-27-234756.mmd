@@ -1,0 +1,110 @@
+---
+config:
+  layout: elk
+---
+classDiagram
+direction TB
+    class Usuario {
+	    +BigAutoField usu_id
+	    +TextField usu_nombres
+	    +TextField usu_apellidos
+	    +CharField usu_contrasena
+	    +DateTimeField usu_fecha_nacimiento
+	    +DateTimeField usu_fecha_creacion
+	    +DateTimeField usu_fecha_modificacion
+	    +EmailField usu_email(unique)
+	    +URLField usu_imagen_perfil(optional)
+    }
+
+    class Relacion {
+	    +BigAutoField rel_id
+	    +ForeignKey rel_usuario1 -~ Usuario
+	    +ForeignKey rel_usuario2 -~ Usuario
+	    +TextField rel_tipo
+	    +DateTimeField rel_fecha_creacion
+        +BooleanField rel_estado
+    }
+
+    class Torneos {
+	    +BigAutoField tor_id
+	    +TextField tor_nombre
+	    +TextField tor_descripcion
+	    +DateTimeField tor_fecha_inicio
+	    +DateTimeField tor_fecha_fin
+	    +DateTimeField tor_fecha_creacion
+	    +DateTimeField tor_fecha_modificacion
+    }
+
+    class Inscripciones {
+	    +BigAutoField ins_id
+	    +ForeignKey ins_usuario -~ Usuario
+	    +ForeignKey ins_torneo -~ Torneos
+	    +DateTimeField ins_fecha_inscripcion
+        +TextField ins_estado
+    }
+
+    class Ranking {
+	    +BigAutoField rank_id
+	    +TextField rank_nombre
+	    +TextField rank_descripcion
+	    +ForeignKey rank_torneo -~ Torneos
+    }
+
+    class RankingUsuario {
+	    +BigAutoField raus_id
+	    +ForeignKey raus_usuario -~ Usuario
+	    +ForeignKey raus_ranking -~ Ranking
+	    +Integer raus_puntos
+    }
+
+    class Partido {
+	    +AutoField par_id
+	    +DateTimeField par_fecha
+	    +ForeignKey par_ganador -~ PartidoRol
+    }
+
+    class PartidoRol {
+	    +AutoField par_rol_id
+	    +TextField par_rol_partido
+    }
+
+    class PartidoUsuario {
+	    +AutoField paus_id
+	    +ForeignKey paus_partido -~ Partido
+	    +ForeignKey paus_usuario -~ Usuario
+	    +ForeignKey paus_rol -~ PartidoRol
+    }
+
+    class Set {
+	    +AutoField set_id
+	    +ForeignKey set_partido -~ Partido
+    }
+
+    class Game {
+	    +AutoField game_id
+	    +ForeignKey game_set -~ Set
+    }
+
+    class Punto {
+	    +AutoField punto_id
+	    +ForeignKey punto_game -~ Game
+	    +ForeignKey punto_usuario -~ Usuario
+	    +TimeField punto_tiempo
+    }
+
+    Relacion --> Usuario : usuario1
+    Relacion --> Usuario : usuario2
+    Inscripciones --> Usuario
+    Inscripciones --> Torneos
+    Ranking --> Torneos
+    RankingUsuario --> Usuario
+    RankingUsuario --> Ranking
+    Partido --> PartidoRol : ganador
+    PartidoUsuario --> Partido
+    PartidoUsuario --> Usuario
+    PartidoUsuario --> PartidoRol
+    Set --> Partido
+    Game --> Set
+    Punto --> Game
+    Punto --> Usuario
+    Usuario -- PartidoUsuario

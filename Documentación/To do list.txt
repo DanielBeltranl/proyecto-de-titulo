@@ -1,0 +1,5 @@
+- Historias de usuario
+- Carta Gantt
+- Evidencias (Modulo 7)
+- Plan de trabajo - completar (Modulo 6)
+- Acotar publico objetivo 
