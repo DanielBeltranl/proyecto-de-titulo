@@ -17,7 +17,7 @@ Las pruebas son **automatizadas** y se ejecutan con el framework de testing de D
 (`django.test`) sobre el cliente de API de DRF (`rest_framework.test.APITestCase`).
 
 **Principio de diseño — aislamiento:** las pruebas no dependen de infraestructura externa.
-La aplicación en producción usa PostgreSQL (Neon) y Redis, pero las pruebas corren sobre un
+La aplicación en producción usa PostgreSQL , pero las pruebas corren sobre un
 entorno aislado para que cualquier integrante pueda ejecutarlas en cualquier máquina sin
 levantar servicios:
 
