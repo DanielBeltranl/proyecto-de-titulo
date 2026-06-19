@@ -1,0 +1,42 @@
+.widgetContainer {
+    background-color: #1b1b1b;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'Manrope', sans-serif;
+}
+
+.headerSection {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(83, 68, 52, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1f1f1f;
+}
+
+.headerTitle {
+    font-size: 0.875rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #ffc174;
+    margin: 0;
+}
+
+.badge {
+    background-color: rgba(255, 193, 116, 0.2);
+    color: #ffc174;
+    font-size: 0.625rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: 700;
+}
+
+.contentSection {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}

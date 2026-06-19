@@ -1,0 +1,12 @@
+.gap {
+    gap: 1rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+

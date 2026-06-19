@@ -1,0 +1,214 @@
+.historial-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #e2e2e2;
+  font-family: 'Manrope', -apple-system, sans-serif;
+}
+
+@media (min-width: 768px) {
+  .historial-container { padding: 3rem 2rem; }
+}
+
+/* ─── Header ─────────────────────────────────────── */
+
+.historial-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.historial-back {
+  background: none;
+  border: 1px solid rgba(255, 193, 116, 0.3);
+  color: #ffc174;
+  padding: 0.4rem 0.9rem;
+  border-radius: 0.375rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-top: 0.25rem;
+  transition: background 0.2s;
+}
+
+.historial-back:hover { background: rgba(255, 193, 116, 0.1); }
+
+.historial-title {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #ffc174;
+  margin: 0 0 0.25rem 0;
+}
+
+.historial-subtitle {
+  font-size: 0.8rem;
+  color: #a08e7a;
+  margin: 0;
+}
+
+/* ─── States ─────────────────────────────────────── */
+
+.historial-state {
+  color: #a08e7a;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 3rem;
+}
+
+/* ─── List ───────────────────────────────────────── */
+
+.historial-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ─── Card ───────────────────────────────────────── */
+
+.historial-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: #1a1a1a;
+  border-radius: 0.75rem;
+  border-left: 3px solid #d4af37;
+  transition: background-color 0.2s;
+}
+
+.historial-card:hover { background-color: #222; }
+
+/* Meta row */
+.historial-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: #a08e7a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.historial-meta-dot { color: rgba(255, 193, 116, 0.3); }
+.historial-date     { color: #ffc174; font-weight: 700; }
+
+/* Players row */
+.historial-players {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.historial-player {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.historial-player--p2 { justify-content: flex-end; }
+
+.historial-player-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2e2e2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.historial-result-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.badge-win  { background: rgba(72,199,116,0.15); color: #48c774; border: 1px solid rgba(72,199,116,0.3); }
+.badge-loss { background: rgba(255,82,82,0.15);  color: #ff5252; border: 1px solid rgba(255,82,82,0.3); }
+
+.historial-guest-tag {
+  font-size: 0.6rem;
+  background: rgba(255,193,116,0.1);
+  border: 1px solid rgba(255,193,116,0.3);
+  color: #ffc174;
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.3rem;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.historial-score-center {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.score-win  { color: #ffc174; }
+.score-muted { color: #555; }
+.score-dash { color: #444; font-weight: 400; font-size: 1.2rem; }
+
+/* Sets */
+.historial-sets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.historial-set {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 0.375rem;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.historial-set-label {
+  color: #666;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 0.25rem;
+}
+
+.historial-set-score { font-weight: 800; }
+.set-win  { color: #ffc174; }
+.set-loss { color: #555; }
+.set-sep  { color: #444; }
+
+.historial-games {
+  color: #666;
+  font-size: 0.7rem;
+  margin-left: 0.25rem;
+}
+
+/* Footer */
+.historial-footer {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 0.75rem;
+}
+
+.historial-duration {
+  font-size: 0.75rem;
+  color: #a08e7a;
+}

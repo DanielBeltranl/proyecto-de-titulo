@@ -1,0 +1,62 @@
+.vsSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.5rem;
+}
+
+.playerCol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.avatarContainerP1 {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 193, 116, 0.4);
+    background-color: #353535;
+}
+
+.avatarContainerP2 {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    overflow: hidden;
+    border: 2px solid rgba(216, 195, 173, 0.2);
+    background-color: #353535;
+}
+
+.avatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.playerName {
+    font-size: 0.625rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    color: #e2e2e2;
+}
+
+.playerNameP2 {
+    font-size: 0.625rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    color: #d8c3ad;
+}
+
+.vsText {
+    color: #a08e7a;
+    font-weight: 900;
+    font-size: 1.25rem;
+    font-style: italic;
+    opacity: 0.3;
+}

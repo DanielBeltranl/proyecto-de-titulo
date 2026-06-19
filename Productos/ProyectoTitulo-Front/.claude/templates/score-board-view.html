@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ELITE COURT - Umpire View</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#1b1b1b",
+                        "on-secondary": "#3c2f00",
+                        "tertiary-fixed-dim": "#7fd0ff",
+                        "surface-container-high": "#2a2a2a",
+                        "surface": "#131313",
+                        "on-secondary-container": "#342800",
+                        "secondary-fixed": "#ffe088",
+                        "primary": "#ffc174",
+                        "on-error-container": "#ffdad6",
+                        "surface-tint": "#ffb95f",
+                        "outline": "#a08e7a",
+                        "on-secondary-fixed": "#241a00",
+                        "on-primary-fixed": "#2a1700",
+                        "on-tertiary-container": "#004966",
+                        "primary-fixed": "#ffddb8",
+                        "on-surface-variant": "#d8c3ad",
+                        "error": "#ffb4ab",
+                        "background": "#131313",
+                        "on-tertiary": "#00344a",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0e0e0e",
+                        "outline-variant": "#534434",
+                        "secondary-container": "#af8d11",
+                        "secondary": "#e9c349",
+                        "surface-variant": "#353535",
+                        "inverse-on-surface": "#303030",
+                        "surface-dim": "#131313",
+                        "surface-container": "#1f1f1f",
+                        "on-background": "#e2e2e2",
+                        "surface-bright": "#393939",
+                        "surface-container-highest": "#353535",
+                        "on-surface": "#e2e2e2",
+                        "tertiary": "#8fd5ff",
+                        "inverse-primary": "#855300",
+                        "tertiary-container": "#1abdff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "inverse-surface": "#e2e2e2",
+                        "on-primary-fixed-variant": "#653e00",
+                        "secondary-fixed-dim": "#e9c349",
+                        "on-primary": "#472a00",
+                        "primary-fixed-dim": "#ffb95f",
+                        "on-primary-container": "#613b00",
+                        "tertiary-fixed": "#c5e7ff",
+                        "primary-container": "#f59e0b",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed": "#001e2d",
+                        "on-tertiary-fixed-variant": "#004c6a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-obsidian-gradient {
+            background: linear-gradient(135deg, #1f1f1f 0%, #131313 100%);
+        }
+        .btn-primary-gradient {
+            background: linear-gradient(135deg, #f59e0b 0%, #ffc174 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-[#131313] dark:bg-[#0E0E0E] flex justify-between items-center px-6 h-16 w-full sticky top-0 z-50">
+    <div class="flex items-center gap-4">
+        <button class="hover:bg-[#1F1F1F] transition-colors p-2 rounded-full active:scale-95 duration-100">
+            <span class="material-symbols-outlined text-[#D8C3AD]">menu</span>
+        </button>
+        <div class="hidden md:flex gap-6">
+            <a class="text-on-surface font-semibold text-sm tracking-widest uppercase hover:text-[#F59E0B] transition-colors" href="#">PARTIDO</a>
+            <a class="text-on-surface font-semibold text-sm tracking-widest uppercase hover:text-[#F59E0B] transition-colors" href="#">TORNEO</a>
+            <a class="text-on-surface font-semibold text-sm tracking-widest uppercase hover:text-[#F59E0B] transition-colors" href="#">ESTADÍSTICAS</a>
+        </div>
+    </div>
+    <h1 class="text-xl font-black tracking-tighter text-[#F59E0B] font-manrope uppercase absolute left-1/2 -translate-x-1/2">
+        ELITE COURT
+    </h1>
+    <div class="flex items-center gap-3">
+        <button class="hover:bg-[#1F1F1F] transition-colors p-2 rounded active:scale-95 duration-100">
+            <span class="material-symbols-outlined text-[#F59E0B]">qr_code_2</span>
+        </button>
+        <button class="hover:bg-[#1F1F1F] transition-colors p-2 rounded active:scale-95 duration-100">
+            <span class="material-symbols-outlined text-[#F59E0B]">settings</span>
+        </button>
+        <div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/30 ml-2">
+            <img alt="Umpire Profile" class="w-full h-full object-cover" data-alt="Professional sports official headshot in low-key lighting, sharp focus on facial features, dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlYHiArGgdF26-go5QCovYZ4uyFutTPDQOJV4iApzlKMYZU8uHujzRxtujXx4Kxow9vFKWqkt6c_qt3oKyS6Yrr5lBdaC6A7o9MPRwff_dNjbjr3SrInQyHahTdLZMbPPWaqp-DFw4Qt1_XIzru98fq1Vlf-tin3KS-aNLD0vNRkIUoTK3u7MdME15cwPQ5bIVeVV56m-3vz-l92trrfIdwxDpje76V0WBfnbZO8MD7SCJhWck1ZaBfH9a5BZkMTe3Hh21XAThEL8"/>
+        </div>
+    </div>
+</header>
+<main class="max-w-7xl mx-auto p-4 md:p-8 space-y-6">
+    <!-- Dashboard Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Main Scoreboard Section -->
+        <div class="lg:col-span-8 space-y-6">
+            <!-- Match Identity & Timer -->
+            <div class="bg-surface-container-low p-6 rounded-xl flex flex-wrap justify-between items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="bg-primary/10 px-4 py-2 rounded border-l-4 border-primary">
+                        <span class="text-primary text-xs font-bold tracking-widest uppercase block mb-1">Sesión Activa</span>
+                        <span class="text-on-surface font-mono text-lg font-bold">DT-8829</span>
+                    </div>
+                    <div>
+                        <p class="text-on-surface-variant text-xs uppercase tracking-widest font-bold">Total Match</p>
+                        <p class="text-2xl font-black tracking-tighter">01:42:15</p>
+                    </div>
+                </div>
+                <div class="flex gap-8">
+                    <div class="text-center">
+                        <p class="text-on-surface-variant text-[10px] uppercase tracking-widest font-bold">Set Timer</p>
+                        <p class="text-xl font-bold">24:10</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-on-surface-variant text-[10px] uppercase tracking-widest font-bold">Game Timer</p>
+                        <p class="text-xl font-bold text-primary">02:45</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Interactive Score Table -->
+            <div class="grid grid-cols-1 gap-1 overflow-hidden rounded-2xl">
+                <!-- Player 1 Row -->
+                <div class="bg-surface-container flex items-center h-48 group">
+                    <div class="flex-1 px-8">
+                        <span class="text-primary-container text-xs font-black uppercase tracking-tighter mb-2 block">SERVIDOR</span>
+                        <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-on-surface">CARLOS ALCARAZ</h2>
+                    </div>
+                    <div class="flex items-center h-full">
+                        <div class="w-24 md:w-32 h-full flex items-center justify-center bg-surface-container-high text-4xl font-black border-x border-outline-variant/10">1</div>
+                        <div class="w-32 md:w-48 h-full flex items-center justify-center bg-surface-container-highest text-7xl md:text-8xl font-black text-primary">30</div>
+                    </div>
+                </div>
+                <!-- Player 2 Row -->
+                <div class="bg-surface-container-low flex items-center h-48">
+                    <div class="flex-1 px-8">
+                        <span class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-2 block opacity-0">OPONENTE</span>
+                        <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-on-surface-variant">JANNIK SINNER</h2>
+                    </div>
+                    <div class="flex items-center h-full">
+                        <div class="w-24 md:w-32 h-full flex items-center justify-center bg-surface-container text-4xl font-black border-x border-outline-variant/10">0</div>
+                        <div class="w-32 md:w-48 h-full flex items-center justify-center bg-surface-container-high text-7xl md:text-8xl font-black text-on-surface-variant">15</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Score Controls -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button class="btn-primary-gradient h-32 rounded-xl flex flex-col items-center justify-center text-on-primary-container active:scale-95 transition-transform">
+                    <span class="text-[10px] font-black tracking-[0.2em] uppercase mb-1">SUMAR PUNTO</span>
+                    <span class="text-3xl font-black tracking-tighter uppercase">JUGADOR 1</span>
+                </button>
+                <button class="bg-surface-container-highest h-32 rounded-xl flex flex-col items-center justify-center text-on-surface active:scale-95 transition-transform border border-outline-variant/20">
+                    <span class="text-[10px] font-black tracking-[0.2em] uppercase mb-1">SUMAR PUNTO</span>
+                    <span class="text-3xl font-black tracking-tighter uppercase">JUGADOR 2</span>
+                </button>
+                <div class="md:col-span-2 grid grid-cols-3 gap-4">
+                    <button class="bg-surface-container-low h-16 rounded-lg flex items-center justify-center gap-2 text-on-surface-variant hover:bg-surface-container transition-colors font-bold uppercase text-xs tracking-widest">
+                        <span class="material-symbols-outlined text-sm">undo</span> DESHACER
+                    </button>
+                    <button class="bg-surface-container-low h-16 rounded-lg flex items-center justify-center gap-2 text-on-surface-variant hover:bg-surface-container transition-colors font-bold uppercase text-xs tracking-widest">
+                        <span class="material-symbols-outlined text-sm">swap_vert</span> CAMBIO LADO
+                    </button>
+                    <button class="bg-error-container/20 h-16 rounded-lg flex items-center justify-center gap-2 text-error hover:bg-error-container/30 transition-colors font-bold uppercase text-xs tracking-widest">
+                        <span class="material-symbols-outlined text-sm">emergency</span> MEDICAL
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Performance Dashboard Sidebar -->
+        <div class="lg:col-span-4 space-y-6">
+            <!-- Share/QR Section -->
+            <div class="bg-surface-container-high p-8 rounded-2xl flex flex-col items-center text-center">
+                <p class="text-on-surface-variant text-xs font-black uppercase tracking-[0.3em] mb-6">COMPARTIR MARCADOR</p>
+                <div class="bg-white p-4 rounded-xl mb-6">
+                    <img alt="Session QR Code" class="w-32 h-32" data-alt="Digital black and white QR code on a clean white background, sharp edges, high contrast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPVV7rHtTTRmg45KvNSK4Eff1M0mI5Hz7gbzkZ5okdAm2w61cax2ZX3rZxX-LdfyQ8RhGDf9WPyrN9EuxXLvOd7wyYXOZWSF7wosK8Hqf6KBudjVr93AtFKf38kk4pMe-hvORH8yWOAdCBYPIwzDMHAJA62hkPIZk21rYYNTCKSnttKCFBaPUaRGc5Sx8xsZk-kCxUXQMF3mwPRAt_kklgFYBjhe8hYfk06TW1egMuVbaSKTex2frMjv9k3eZcL8GZTAX7mN1itq8"/>
+                </div>
+                <div class="space-y-1">
+                    <p class="text-primary font-black text-xl tracking-tighter uppercase">SESIÓN EN VIVO</p>
+                    <p class="text-on-surface-variant text-sm">Scannea para ver en tiempo real</p>
+                </div>
+            </div>
+            <!-- Rendimiento en Tiempo Real (VS) -->
+            <div class="bg-surface-container-low rounded-2xl flex flex-col overflow-hidden">
+                <div class="p-6 border-b border-outline-variant/10 flex justify-between items-center bg-surface-container">
+                    <h3 class="text-sm font-black uppercase tracking-widest text-primary">RENDIMIENTO (VS)</h3>
+                    <span class="bg-primary/20 text-primary text-[10px] px-2 py-1 rounded font-bold">REAL-TIME DATA</span>
+                </div>
+                <div class="p-6 space-y-8">
+                    <!-- VS Players Headers -->
+                    <div class="flex justify-between items-center px-2">
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/40 bg-surface-container-highest">
+                                <img alt="P1" class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida/ADBb0uiJU8Bxy8RpR2O9uNjx-KxQnQUmHq9HtMvphfJo-Nki2Jemgk4loQ6a0tLA3s9Ums4ymxAeK_QuPmJP9q8DaOTboxpUgu49ydgBBH-6dT0xrC3QJro1ZOs0JeZHqz069QxMx43ARFiaCNGNtpZSnPup-psW_-IZx7WjuBJKXTOfj1L9zatjHZHc-EX9oA-2aNLOdq4KSRG1_8MPf9qaZrKYc51SK-1imvFPc6ZNOizLoV6Hh5YVqe-VWEJgUJqmUAPH2M45HyaK"/>
+                            </div>
+                            <span class="text-[10px] font-black uppercase tracking-tighter text-on-surface">J1 Alcaraz</span>
+                        </div>
+                        <div class="text-outline-variant font-black text-xl italic opacity-30">VS</div>
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-on-surface-variant/20 bg-surface-container-highest">
+                                <img alt="P2" class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida/ADBb0uiJU8Bxy8RpR2O9uNjx-KxQnQUmHq9HtMvphfJo-Nki2Jemgk4loQ6a0tLA3s9Ums4ymxAeK_QuPmJP9q8DaOTboxpUgu49ydgBBH-6dT0xrC3QJro1ZOs0JeZHqz069QxMx43ARFiaCNGNtpZSnPup-psW_-IZx7WjuBJKXTOfj1L9zatjHZHc-EX9oA-2aNLOdq4KSRG1_8MPf9qaZrKYc51SK-1imvFPc6ZNOizLoV6Hh5YVqe-VWEJgUJqmUAPH2M45HyaK"/>
+                            </div>
+                            <span class="text-[10px] font-black uppercase tracking-tighter text-on-surface-variant">J2 Sinner</span>
+                        </div>
+                    </div>
+                    <!-- Stat 1: Distancia Media -->
+                    <div class="space-y-2">
+                        <div class="flex justify-center">
+                            <span class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Distancia Media (KM)</span>
+                        </div>
+                        <div class="flex justify-between items-end gap-4">
+                            <div class="flex-1 text-left">
+                                <p class="text-2xl font-black tracking-tighter text-primary">3.42</p>
+                                <div class="h-1 bg-primary w-full rounded-full"></div>
+                            </div>
+                            <div class="flex-1 text-right">
+                                <p class="text-2xl font-black tracking-tighter text-on-surface-variant">2.89</p>
+                                <div class="h-1 bg-outline-variant w-full rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Stat 2: Efectividad de Puntos -->
+                    <div class="space-y-2">
+                        <div class="flex justify-center">
+                            <span class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Efectividad (W/L %)</span>
+                        </div>
+                        <div class="flex justify-between items-center gap-4">
+                            <div class="flex-1 text-left">
+                                <p class="text-lg font-black tracking-tighter">64%</p>
+                                <p class="text-[10px] text-on-surface-variant font-bold">54/84</p>
+                            </div>
+                            <div class="flex-1 text-right">
+                                <p class="text-lg font-black tracking-tighter text-on-surface-variant">54%</p>
+                                <p class="text-[10px] text-on-surface-variant/60 font-bold">45/84</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Stat 3: Break Points -->
+                    <div class="space-y-2">
+                        <div class="flex justify-center">
+                            <span class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Break Points (WON/SV)</span>
+                        </div>
+                        <div class="flex justify-between items-center gap-4">
+                            <div class="flex-1 text-left">
+                                <div class="inline-block px-2 py-0.5 bg-primary/10 border border-primary/20 rounded">
+                                    <p class="text-sm font-black text-primary">3/5 <span class="text-[8px] opacity-70">WON</span></p>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-right">
+                                <div class="inline-block px-2 py-0.5 bg-surface-container-highest border border-outline-variant/20 rounded">
+                                    <p class="text-sm font-black text-on-surface-variant">2/4 <span class="text-[8px] opacity-70">SAVED</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Stat 4: Duración Media Puntos -->
+                    <div class="space-y-2">
+                        <div class="flex justify-center">
+                            <span class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Duración Media (mm:ss)</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-px bg-outline-variant/10 rounded-lg overflow-hidden border border-outline-variant/10">
+                            <div class="bg-surface-container-high p-3 text-center">
+                                <p class="text-xs font-bold text-primary uppercase mb-1">Won pts</p>
+                                <p class="text-xl font-black tracking-tighter">00:18</p>
+                            </div>
+                            <div class="bg-surface-container-high p-3 text-center">
+                                <p class="text-xs font-bold text-on-surface-variant uppercase mb-1">Lost pts</p>
+                                <p class="text-xl font-black tracking-tighter text-on-surface-variant">00:24</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center py-3 px-4 bg-[#131313] dark:bg-[#0E0E0E] z-50 border-t border-[#534434]/10">
+    <!-- Scoreboard Active -->
+    <a class="flex flex-col items-center justify-center text-[#F59E0B] bg-[#1F1F1F] rounded-lg px-4 py-1 translate-y-[-2px] transition-transform" href="#">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">scoreboard</span>
+        <span class="font-manrope text-[10px] font-bold tracking-widest uppercase mt-1">Scoreboard</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-[#D8C3AD]/60 px-4 py-1 hover:text-[#F59E0B] transition-all" href="#">
+        <span class="material-symbols-outlined">history_edu</span>
+        <span class="font-manrope text-[10px] font-bold tracking-widest uppercase mt-1">History</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-[#D8C3AD]/60 px-4 py-1 hover:text-[#F59E0B] transition-all" href="#">
+        <span class="material-symbols-outlined">sensors</span>
+        <span class="font-manrope text-[10px] font-bold tracking-widest uppercase mt-1">Live Stream</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-[#D8C3AD]/60 px-4 py-1 hover:text-[#F59E0B] transition-all" href="#">
+        <span class="material-symbols-outlined">analytics</span>
+        <span class="font-manrope text-[10px] font-bold tracking-widest uppercase mt-1">Analytics</span>
+    </a>
+</nav>
+</body></html>

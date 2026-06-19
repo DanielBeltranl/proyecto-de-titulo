@@ -1,0 +1,65 @@
+.statBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.statTitleContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.statTitle {
+    font-size: 0.625rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #d8c3ad;
+}
+
+.flexBetweenCentered {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.flex1Left {
+    flex: 1;
+    text-align: left;
+}
+
+.flex1Right {
+    flex: 1;
+    text-align: right;
+}
+
+.winRatePct {
+    font-size: 1.125rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    margin: 0;
+    color: #e2e2e2;
+}
+
+.winRatePctP2 {
+    font-size: 1.125rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    margin: 0;
+    color: #d8c3ad;
+}
+
+.winRateFrac {
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: #d8c3ad;
+    margin: 0;
+}
+
+.winRateFracP2 {
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: rgba(216, 195, 173, 0.6);
+    margin: 0;
+}

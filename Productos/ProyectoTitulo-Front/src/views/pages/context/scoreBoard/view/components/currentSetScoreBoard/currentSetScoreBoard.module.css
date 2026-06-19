@@ -1,0 +1,84 @@
+@keyframes gameIn {
+    from {
+        opacity: 0;
+        transform: scale(0.75);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gameValue,
+    .completedColumn {
+        animation: none;
+    }
+}
+
+.setsWrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.setColumn {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid rgba(83, 68, 52, 0.1);
+    border-right: 1px solid rgba(83, 68, 52, 0.1);
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Sets cerrados: tamaño reducido, entrada animada */
+.completedColumn {
+    animation: columnIn 400ms cubic-bezier(0.34, 1.2, 0.64, 1) both;
+}
+
+.completedColumn .gameCell {
+    font-size: 1.5rem;
+    width: 4rem;
+}
+
+@keyframes columnIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.gameCell {
+    height: 12rem;
+    width: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.25rem;
+    font-weight: 900;
+    color: #e2e2e2;
+}
+
+@media (min-width: 768px) {
+    .gameCell {
+        width: 8rem;
+    }
+
+    .completedColumn .gameCell {
+        width: 5rem;
+    }
+}
+
+.gameValue {
+    animation: gameIn 300ms cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+.bgTop {
+    background-color: #2a2a2a;
+}
+
+.bgBottom {
+    background-color: #1f1f1f;
+}

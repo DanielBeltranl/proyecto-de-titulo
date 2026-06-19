@@ -1,0 +1,370 @@
+.card {
+  width: 100%;
+  background-color: #1f1f1f;
+  border: 1px solid rgba(83, 68, 52, 0.2);
+  border-left: 3px solid transparent;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  text-align: left;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: 1.25rem;
+  }
+}
+
+.card:hover {
+  background-color: #252525;
+  border-left-color: #ffc174;
+}
+
+/* ─── Card body (clickable area) ─────────────── */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+}
+
+.cardBody:focus-visible {
+  outline: 2px solid #ffc174;
+  border-radius: 0.375rem;
+}
+
+.cardBody:hover .chevron {
+  color: #ffc174;
+}
+
+/* ─── Top row ─────────────────────────────────── */
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.rival {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-width: 0;
+}
+
+.rivalAvatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background-color: #2a2a2a;
+  border: 1px solid rgba(160, 142, 122, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a08e7a;
+  flex-shrink: 0;
+}
+
+.rivalAvatar :global(.material-symbols-outlined) {
+  font-size: 1.1rem;
+}
+
+.rivalInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.rivalLabel {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a08e7a;
+}
+
+.rivalName {
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  font-weight: 700;
+  color: #e2e2e2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── State badge ─────────────────────────────── */
+.stateBadge {
+  font-size: 0.55rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.625rem;
+  border-radius: 2rem;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.statePENDIENTE {
+  color: #a08e7a;
+  border-color: rgba(160, 142, 122, 0.4);
+  background-color: rgba(160, 142, 122, 0.08);
+}
+
+.stateACEPTADO {
+  color: #1abdff;
+  border-color: rgba(26, 189, 255, 0.4);
+  background-color: rgba(26, 189, 255, 0.08);
+}
+
+.stateINICIADO {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.4);
+  background-color: rgba(74, 222, 128, 0.08);
+}
+
+.statePAUSADO {
+  color: #ffc174;
+  border-color: rgba(255, 193, 116, 0.4);
+  background-color: rgba(255, 193, 116, 0.08);
+}
+
+.stateFINALIZADA {
+  color: #a08e7a;
+  border-color: rgba(160, 142, 122, 0.25);
+  background-color: rgba(160, 142, 122, 0.05);
+}
+
+/* ─── Meta row ────────────────────────────────── */
+.cardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #a08e7a;
+  font-size: 0.7rem;
+  overflow: hidden;
+}
+
+.metaItem :global(.material-symbols-outlined) {
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.metaItem span:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* ─── Surface chip ────────────────────────────── */
+.surfaceChip {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.25rem;
+}
+
+.surfaceClay {
+  background-color: rgba(196, 98, 45, 0.2);
+  color: #c47a3a;
+}
+
+.surfaceHard {
+  background-color: rgba(26, 189, 255, 0.15);
+  color: #1abdff;
+}
+
+.surfaceGrass {
+  background-color: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+}
+
+/* ─── Best of & date ──────────────────────────── */
+.bestOf {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d8c3ad;
+}
+
+.date {
+  font-size: 0.6rem;
+  color: #a08e7a;
+  margin-left: auto;
+}
+
+/* ─── Chevron ─────────────────────────────────── */
+.chevron {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  color: rgba(160, 142, 122, 0.4);
+  transition: color 0.2s ease;
+}
+
+/* ─── Actions area ────────────────────────────── */
+.cardActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(83, 68, 52, 0.15);
+}
+
+/* ─── Accept button ───────────────────────────── */
+.btnAccept {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background-color: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnAccept:hover:not(:disabled) {
+  background-color: rgba(74, 222, 128, 0.2);
+}
+
+.btnAccept:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ─── Start button ────────────────────────────── */
+.btnStart {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background-color: rgba(26, 189, 255, 0.1);
+  color: #1abdff;
+  border: 1px solid rgba(26, 189, 255, 0.3);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnStart:hover {
+  background-color: rgba(26, 189, 255, 0.2);
+}
+
+/* ─── Waiting button (invited coach, ACEPTADO) ── */
+.btnWaiting {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background-color: rgba(160, 142, 122, 0.06);
+  color: #7a6e65;
+  border: 1px solid rgba(160, 142, 122, 0.2);
+  border-radius: 0.5rem;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* ─── Score button (invited coach, INICIADO) ──── */
+.btnScore {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background-color: rgba(255, 193, 116, 0.1);
+  color: #ffc174;
+  border: 1px solid rgba(255, 193, 116, 0.3);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnScore:hover {
+  background-color: rgba(255, 193, 116, 0.2);
+}
+
+/* ─── Continue button (scheduling coach, INICIADO/PAUSADO) ── */
+.btnContinue {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background-color: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnContinue:hover {
+  background-color: rgba(74, 222, 128, 0.2);
+}
+
+/* ─── Spin icon (accept loading) ─────────────── */
+.spinIcon {
+  font-size: 1rem !important;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

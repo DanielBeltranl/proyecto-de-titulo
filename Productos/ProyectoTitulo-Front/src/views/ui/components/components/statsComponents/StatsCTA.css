@@ -1,0 +1,105 @@
+.stats-cta {
+  background: linear-gradient(145deg, #1a1a1a, #111);
+  border: 4px solid rgba(245, 245, 245, 0.5);
+  border-radius: 0;
+  padding: clamp(1.1rem, 4vw, 1.5rem);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', -apple-system, sans-serif;
+  width: 100%;
+  max-width: 480px;
+  box-sizing: border-box;
+}
+
+.stats-cta:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+}
+
+/* Content */
+.stats-cta__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.stats-cta__title {
+  color: #d4af37;
+  font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.stats-cta__subtitle {
+  font-size: 0.75rem;
+  color: #a08e7a;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+/* Button */
+.stats-cta__button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #d4af37, #f59e0b);
+  color: #1a1a1a;
+  border: none;
+  padding: 0.9rem 1.5rem;
+  border-radius: 0;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.stats-cta__button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+  filter: brightness(1.08);
+}
+
+.stats-cta__button:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
+}
+
+.stats-cta__btn-icon {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.stats-cta__button:hover .stats-cta__btn-icon {
+  transform: translateX(4px);
+}
+
+/* Background icon */
+.stats-cta__bg-icon {
+  position: absolute;
+  bottom: -24px;
+  right: -24px;
+  font-size: 120px;
+  color: rgba(255, 215, 0, 0.08);
+  transition: all 0.5s ease;
+  font-variation-settings: "wght" 700;
+  z-index: 1;
+}
+
+.stats-cta:hover .stats-cta__bg-icon {
+  transform: scale(1.1);
+  color: rgba(255, 215, 0, 0.15);
+}

@@ -1,0 +1,192 @@
+.card {
+  background: #1b1b1b;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #d8c3ad;
+  margin: 0 0 2rem 0;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #ffc174;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* Donut */
+.donutWrapper {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.donutContainer {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  flex-shrink: 0;
+}
+
+.donutSvg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.donutCenter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.donutPct {
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #e2e2e2;
+}
+
+.donutLabel {
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #d8c3ad;
+  margin-top: 0.25rem;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.legendDotWon {
+  width: 0.75rem;
+  height: 0.75rem;
+  background: #ffddb8;
+  border-radius: 0.125rem;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.legendDotLost {
+  width: 0.75rem;
+  height: 0.75rem;
+  background: #353535;
+  border-radius: 0.125rem;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.legendLabel {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #d8c3ad;
+  margin: 0 0 0.2rem 0;
+}
+
+.legendValue {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #e2e2e2;
+  margin: 0;
+}
+
+/* Break points */
+.breakPoints {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bpCard {
+  background: #2a2a2a;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border-left: 2px solid #e9c349;
+}
+
+.bpCardBad {
+  border-left-color: #ffb4ab;
+}
+
+.bpTitle {
+  font-size: 0.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #d8c3ad;
+  margin: 0 0 0.5rem 0;
+}
+
+.bpRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.bpFraction {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #e2e2e2;
+  margin: 0;
+}
+
+.bpPctGood {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #e9c349;
+}
+
+.bpPctBad {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffb4ab;
+}
+
+.bpSub {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #d8c3ad;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}

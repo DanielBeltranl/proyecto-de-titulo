@@ -1,0 +1,74 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #d8c3ad;
+  display: block;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.surfaceButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #353535;
+  border: 1px solid rgba(165, 137, 109, 0.2);
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.surfaceButton:hover:not(.active) {
+  border-color: rgba(255, 193, 116, 0.5);
+}
+
+.surfaceButton.active {
+  background-color: #353535;
+  border: 2px solid #ffc174;
+}
+
+.icon {
+  font-size: 1.875rem;
+  margin-bottom: 0.5rem;
+  color: #a08e7a;
+  transition: all 0.3s ease;
+}
+
+.surfaceButton.active .icon {
+  color: #ffc174;
+  font-variation-settings: 'FILL' 1;
+}
+
+.surfaceButton:hover:not(.active) .icon {
+  color: #ffc174;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.surfaceButton.active .label {
+  color: #ffc174;
+}

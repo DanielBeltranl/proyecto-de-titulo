@@ -1,0 +1,66 @@
+.statBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.statTitleContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.statTitle {
+    font-size: 0.625rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #d8c3ad;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background-color: rgba(83, 68, 52, 0.1);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 1px solid rgba(83, 68, 52, 0.1);
+}
+
+.durationCell {
+    background-color: #2a2a2a;
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.durationLabelP1 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ffc174;
+    text-transform: uppercase;
+    margin: 0 0 0.25rem 0;
+}
+
+.durationLabelP2 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #d8c3ad;
+    text-transform: uppercase;
+    margin: 0 0 0.25rem 0;
+}
+
+.durationTime {
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: #e2e2e2;
+    margin: 0;
+}
+
+.durationTimeP2 {
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: #d8c3ad;
+    margin: 0;
+}

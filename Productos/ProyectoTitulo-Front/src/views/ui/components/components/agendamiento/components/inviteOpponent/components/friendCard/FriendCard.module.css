@@ -1,0 +1,102 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #1b1b1b;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.card:hover:not(.selected) {
+  background-color: #2a2a2a;
+}
+
+.card.selected {
+  border: 1px solid rgba(255, 193, 116, 0.4);
+  background-color: rgba(255, 193, 116, 0.05);
+}
+
+.avatarContainer {
+  width: 3rem;
+  height: 3rem;
+  background-color: #353535;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+.card:hover .avatar {
+  filter: grayscale(0);
+}
+
+.avatarPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #a08e7a;
+}
+
+.infoContainer {
+  flex: 1;
+}
+
+.nombre {
+  font-weight: bold;
+  font-size: 0.875rem;
+  color: #e2e2e2;
+  margin-bottom: 0.25rem;
+}
+
+.nivel {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #d8c3ad;
+}
+
+.nivel.amateur,
+.nivel.intermedio,
+.nivel.avanzado {
+  color: #d8c3ad;
+}
+
+.nivel.semipro {
+  color: #ffc174;
+  font-weight: bold;
+}
+
+.nivel.profesional {
+  color: #ffc174;
+  font-weight: bold;
+}
+
+.actionIcon {
+  color: #a08e7a;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.card.selected .actionIcon {
+  color: #ffc174;
+  font-variation-settings: 'FILL' 1;
+}
+
+.card:hover .actionIcon:not(.selected) {
+  color: #ffc174;
+}

@@ -1,0 +1,85 @@
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.label {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    /* Actualizado a los valores del select */
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #a08e7a; /* Color bronce/tenis */
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.required {
+    color: #f59e0b; /* primary-container naranja */
+    font-size: 0.75rem;
+}
+
+.inputField {
+    width: 100%;
+    box-sizing: border-box;
+    /* Fondo ultra oscuro del select */
+    background-color: rgba(14, 14, 14, 0.8);
+    /* Añadimos el borde sutil para que no se pierda en el fondo negro */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0.875rem 1rem;
+    color: #ffffff; /* Blanco puro para legibilidad */
+    border-radius: 0.5rem; /* Match con el select */
+    transition: all 0.3s ease;
+    outline: none;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px; /* Evita zoom en iOS */
+}
+
+/* --- Media Query para Escritorio --- */
+@media (min-width: 768px) {
+    .inputField {
+        font-size: 0.9rem;
+        padding: 0.8rem 1rem;
+    }
+
+    .label {
+        font-size: 0.65rem;
+    }
+}
+
+.inputField::placeholder {
+
+}
+
+.inputField:focus {
+
+    border-color: #f59e0b;
+    background-color: #000000;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+}
+
+.inputError {
+
+    border-color: #ffb4ab !important;
+    background-color: rgba(147, 0, 10, 0.05);
+}
+
+.errorMessage {
+    font-size: 0.65rem;
+    color: #ffb4ab;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.3rem;
+    font-family: 'Manrope', sans-serif;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}

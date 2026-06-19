@@ -1,0 +1,90 @@
+.container {
+    background-color: #1b1b1b; /* surface-container-low */
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'Manrope', sans-serif;
+    /*---margin: 4rem;---*/
+}
+
+/* --- GRUPO IZQUIERDO --- */
+.leftGroup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sessionBadge {
+    background-color: rgba(245, 158, 11, 0.1); /* primary/10 */
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border-left: 4px solid #f59e0b; /* border-primary */
+}
+
+.sessionLabel {
+    color: #f59e0b; /* primary */
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.sessionId {
+    color: #e2e2e2; /* on-surface */
+    font-family: monospace; /* font-mono */
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.totalMatchLabel {
+    color: #d8c3ad; /* on-surface-variant */
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.totalMatchTime {
+    color: #e2e2e2;
+    font-size: 1.5rem;
+    font-weight: 900; /* font-black */
+    letter-spacing: -0.05em; /* tracking-tighter */
+    margin: 0;
+}
+
+/* --- GRUPO DERECHO --- */
+.rightGroup {
+    display: flex;
+    gap: 2rem;
+}
+
+.timerBlock {
+    text-align: center;
+}
+
+.timerLabel {
+    color: #d8c3ad; /* on-surface-variant */
+    font-size: 0.625rem; /* 10px */
+    text-transform: uppercase;
+    letter-spacing: 0.1em; /* tracking-widest */
+    font-weight: 700;
+    margin: 0 0 0.25rem 0;
+}
+
+.timerTime {
+    color: #e2e2e2;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.gameTimeHighlight {
+    color: #f59e0b; /* text-primary */
+}

@@ -1,0 +1,199 @@
+.container {
+  max-width: 850px;
+  margin: 2rem auto;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.season {
+  font-size: 1rem;
+  color: #666;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.row {
+  padding: 1rem 1.25rem;
+  border-radius: 0;
+  border: 4px solid rgba(245, 245, 245, 0.5);
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.row::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  height: 10px;
+  background: rgba(245, 245, 245, 0.4);
+  transform: translateX(-50%);
+}
+
+.row:hover {
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+  transform: translateY(-3px);
+  border-color: rgba(245, 245, 245, 0.9);
+}
+
+.row:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.row:hover .opponentName {
+  color: #d4af37; /* El dorado de tu marca */
+}
+
+.playerInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.avatarContainer {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #333;
+}
+
+.avatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.playerText {
+  min-width: 0;
+}
+
+.opponentName {
+  font-weight: 700;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tournamentName {
+  font-size: 0.7rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.matchStats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
+
+.surfaceInfo {
+  text-align: right;
+}
+
+@media (max-width: 500px) {
+  .surfaceInfo { display: none; }
+
+  .matchStats {
+    gap: 0.75rem;
+  }
+}
+
+.label {
+  font-size: 0.65rem;
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.surfaceValue {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.resultBox {
+  background-color: #2b2b2b;
+  color: #d4af37;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0;
+  min-width: 50px;
+  text-align: center;
+}
+
+.affordance {
+  color: rgba(212, 175, 55, 0.65);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.viewMoreBtn {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #2b2b2b;
+  border: none;
+  border-radius: 0;
+  color: #d4af37;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.viewMoreBtn:hover {
+  background-color: #333;
+  gap: 0.75rem;
+}
+
+.empty {
+  color: #666;
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 1.5rem;
+}

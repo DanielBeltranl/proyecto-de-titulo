@@ -1,0 +1,584 @@
+.main {
+  display: flex;
+  min-height: 100vh;
+  padding: 1rem;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding: 2rem;
+    align-items: center;
+  }
+}
+
+/* ─── Container ──────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    gap: 1.75rem;
+  }
+}
+
+/* ─── Centered (loading / error) ─────────────── */
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.loadingText {
+  color: #d8c3ad;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.errorText {
+  color: #ffb4ab;
+  font-size: 0.9rem;
+  margin: 0;
+  max-width: 300px;
+}
+
+/* ─── Top bar ────────────────────────────────── */
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: transparent;
+  border: none;
+  color: #a08e7a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  transition: color 0.2s ease;
+}
+
+.backBtn:hover {
+  color: #d8c3ad;
+}
+
+.backBtn :global(.material-symbols-outlined) {
+  font-size: 1.1rem;
+}
+
+.btnBack {
+  padding: 0.625rem 1.5rem;
+  background-color: #2a2a2a;
+  border: 1px solid rgba(160, 142, 122, 0.3);
+  border-radius: 0.375rem;
+  color: #d8c3ad;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnBack:hover {
+  background-color: #353535;
+  color: #e2e2e2;
+}
+
+/* ─── State badge ────────────────────────────── */
+.stateBadge {
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border-radius: 2rem;
+  border: 1px solid currentColor;
+}
+
+@media (min-width: 480px) {
+  .stateBadge {
+    font-size: 0.65rem;
+  }
+}
+
+.statePENDIENTE {
+  color: #a08e7a;
+  border-color: rgba(160, 142, 122, 0.4);
+  background-color: rgba(160, 142, 122, 0.08);
+}
+
+.stateACEPTADO {
+  color: #1abdff;
+  border-color: rgba(26, 189, 255, 0.4);
+  background-color: rgba(26, 189, 255, 0.08);
+}
+
+.stateINICIADO {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.4);
+  background-color: rgba(74, 222, 128, 0.08);
+}
+
+.statePAUSADO {
+  color: #ffc174;
+  border-color: rgba(255, 193, 116, 0.4);
+  background-color: rgba(255, 193, 116, 0.08);
+}
+
+.stateFINALIZADA {
+  color: #e9c349;
+  border-color: rgba(233, 195, 73, 0.4);
+  background-color: rgba(233, 195, 73, 0.08);
+}
+
+/* ─── Hero section ───────────────────────────── */
+.heroSection {
+  background-color: #1f1f1f;
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  overflow: hidden;
+}
+
+@media (min-width: 480px) {
+  .heroSection {
+    padding: 2rem 1.5rem;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .heroSection {
+    padding: 2.5rem 2rem;
+    gap: 1.5rem;
+  }
+}
+
+.playerSide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.playerSideRight {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.playerSideRight .playerInfo {
+  align-items: flex-end;
+}
+
+.playerAvatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: #2a2a2a;
+  border: 2px solid rgba(255, 193, 116, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a08e7a;
+  flex-shrink: 0;
+}
+
+@media (min-width: 480px) {
+  .playerAvatar {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .playerAvatar {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}
+
+.playerAvatar :global(.material-symbols-outlined) {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .playerAvatar :global(.material-symbols-outlined) {
+    font-size: 2rem;
+  }
+}
+
+.playerAvatarInvited {
+  border-color: rgba(26, 189, 255, 0.3);
+}
+
+.playerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.playerRole {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #a08e7a;
+}
+
+@media (min-width: 480px) {
+  .playerRole {
+    font-size: 0.6rem;
+  }
+}
+
+.playerName {
+  font-size: clamp(0.9rem, 3vw, 1.35rem);
+  font-weight: 900;
+  color: #e2e2e2;
+  margin: 0;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  word-break: break-word;
+}
+
+/* ─── VS section ─────────────────────────────── */
+.vsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.vsCircle {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: #1b1b1b;
+  border: 2px solid rgba(233, 195, 73, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (min-width: 480px) {
+  .vsCircle {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .vsCircle {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+.vsText {
+  font-size: clamp(0.55rem, 1.5vw, 0.75rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: #e9c349;
+}
+
+.courtLine {
+  width: 2px;
+  height: 1.5rem;
+  background: linear-gradient(to bottom, rgba(233, 195, 73, 0.3), transparent);
+  border-radius: 1px;
+}
+
+@media (min-width: 768px) {
+  .courtLine {
+    height: 2rem;
+  }
+}
+
+/* ─── Details grid ───────────────────────────── */
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 600px) {
+  .detailsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .detailsGrid {
+    gap: 1rem;
+  }
+}
+
+.detailCard {
+  background-color: #1f1f1f;
+  border-radius: 0.75rem;
+  padding: 1rem 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .detailCard {
+    padding: 1.25rem 1rem;
+  }
+}
+
+.detailCard :global(.material-symbols-outlined) {
+  font-size: 1.125rem;
+  color: #ffc174;
+}
+
+.surfaceIcon {
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.detailLabel {
+  display: block;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a08e7a;
+  margin-bottom: 0.1rem;
+}
+
+@media (min-width: 768px) {
+  .detailLabel {
+    font-size: 0.6rem;
+  }
+}
+
+.detailValue {
+  display: block;
+  font-size: clamp(0.7rem, 2vw, 0.875rem);
+  font-weight: 700;
+  color: #e2e2e2;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ─── Actions section ────────────────────────── */
+.actionsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.actionRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+/* Shared button base */
+.btnPrimary,
+.btnContinue,
+.btnResult,
+.btnAccept,
+.btnReject,
+.btnDisabled {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: none;
+  border-radius: 0.625rem;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .btnPrimary,
+  .btnContinue,
+  .btnResult,
+  .btnAccept,
+  .btnReject,
+  .btnDisabled {
+    padding: 1rem 1.25rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+  }
+}
+
+.btnPrimary :global(.material-symbols-outlined),
+.btnContinue :global(.material-symbols-outlined),
+.btnResult :global(.material-symbols-outlined),
+.btnAccept :global(.material-symbols-outlined),
+.btnReject :global(.material-symbols-outlined),
+.btnDisabled :global(.material-symbols-outlined) {
+  font-size: 1.125rem;
+  flex-shrink: 0;
+}
+
+/* Começar partido — gold */
+.btnPrimary {
+  background-color: #e9c349;
+  color: #1b1b1b;
+}
+
+.btnPrimary:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.btnPrimary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btnPrimary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Continuar / Reanudar — blue */
+.btnContinue {
+  background-color: rgba(26, 189, 255, 0.15);
+  color: #1abdff;
+  border: 1px solid rgba(26, 189, 255, 0.3);
+}
+
+.btnContinue:hover:not(:disabled) {
+  background-color: rgba(26, 189, 255, 0.25);
+  border-color: #1abdff;
+}
+
+.btnContinue:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Ver resultado — gold outline */
+.btnResult {
+  background-color: rgba(233, 195, 73, 0.08);
+  color: #e9c349;
+  border: 1px solid rgba(233, 195, 73, 0.3);
+}
+
+.btnResult:hover:not(:disabled) {
+  background-color: rgba(233, 195, 73, 0.15);
+  border-color: #e9c349;
+}
+
+.btnResult:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Aceptar — blue */
+.btnAccept {
+  background-color: rgba(26, 189, 255, 0.15);
+  color: #1abdff;
+  border: 1px solid rgba(26, 189, 255, 0.3);
+}
+
+.btnAccept:hover:not(:disabled) {
+  background-color: rgba(26, 189, 255, 0.25);
+  border-color: #1abdff;
+}
+
+.btnAccept:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Rechazar — red */
+.btnReject {
+  background-color: rgba(255, 180, 171, 0.1);
+  color: #ffb4ab;
+  border: 1px solid rgba(255, 180, 171, 0.25);
+}
+
+.btnReject:hover:not(:disabled) {
+  background-color: rgba(255, 180, 171, 0.2);
+  border-color: #ffb4ab;
+}
+
+.btnReject:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Disabled / Pending */
+.btnDisabled {
+  background-color: rgba(160, 142, 122, 0.08);
+  color: #a08e7a;
+  border: 1px solid rgba(160, 142, 122, 0.2);
+  cursor: not-allowed;
+}
+
+/* ─── Spectator note ─────────────────────────── */
+.spectatorNote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: rgba(160, 142, 122, 0.08);
+  border-radius: 0.625rem;
+  color: #a08e7a;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.spectatorNote :global(.material-symbols-outlined) {
+  font-size: 1rem;
+}
+
+/* ─── Action loading overlay ─────────────────── */
+.actionLoading {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  color: #a08e7a;
+}
+
+/* ─── Spin animation ─────────────────────────── */
+.spinIcon {
+  font-size: 2rem;
+  color: #a08e7a;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

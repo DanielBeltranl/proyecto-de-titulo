@@ -1,0 +1,69 @@
+.statBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.statTitleContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.statTitle {
+    font-size: 0.625rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #d8c3ad;
+}
+
+.flexBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.flex1Left {
+    flex: 1;
+    text-align: left;
+}
+
+.flex1Right {
+    flex: 1;
+    text-align: right;
+}
+
+.distanceNumP1 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: #ffc174;
+    margin: 0 0 0.25rem 0;
+}
+
+.distanceNumP2 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: #d8c3ad;
+    margin: 0 0 0.25rem 0;
+}
+
+.barContainer {
+    width: 100%;
+    background-color: transparent;
+}
+
+.barFillP1 {
+    height: 0.25rem;
+    background-color: #ffc174;
+    border-radius: 9999px;
+}
+
+.barFillP2 {
+    height: 0.25rem;
+    background-color: #534434;
+    border-radius: 9999px;
+    float: right;
+}

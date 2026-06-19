@@ -1,0 +1,70 @@
+.statBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.statTitleContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.statTitle {
+    font-size: 0.625rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #d8c3ad;
+}
+
+.flexBetweenCentered {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.flex1Left {
+    flex: 1;
+    text-align: left;
+}
+
+.flex1Right {
+    flex: 1;
+    text-align: right;
+}
+
+.breakBadgeP1 {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    background-color: rgba(255, 193, 116, 0.1);
+    border: 1px solid rgba(255, 193, 116, 0.2);
+    border-radius: 0.25rem;
+}
+
+.breakBadgeP2 {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    background-color: #353535;
+    border: 1px solid rgba(83, 68, 52, 0.2);
+    border-radius: 0.25rem;
+}
+
+.breakTextP1 {
+    font-size: 0.875rem;
+    font-weight: 900;
+    color: #ffc174;
+    margin: 0;
+}
+
+.breakTextP2 {
+    font-size: 0.875rem;
+    font-weight: 900;
+    color: #d8c3ad;
+    margin: 0;
+}
+
+.breakSub {
+    font-size: 0.5rem;
+    opacity: 0.7;
+}

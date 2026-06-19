@@ -1,0 +1,374 @@
+.page {
+  color: #e2e2e2;
+  background:
+    radial-gradient(circle at top, rgba(255, 193, 116, 0.08), transparent 35%),
+    linear-gradient(180deg, #131313 0%, #0e0e0e 100%);
+}
+
+.hero {
+  min-height: 70vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 7rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 2px 2px, rgba(255, 193, 116, 0.03) 1px, transparent 0);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.heroContent,
+.heroVisual {
+  position: relative;
+  z-index: 1;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+  border-left: 4px solid #ffc174;
+  background: #2a2a2a;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ffc174;
+}
+
+.hero h1 {
+  margin: 1rem 0;
+  font-size: clamp(3.2rem, 10vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.08em;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.hero h1 span {
+  color: #ffc174;
+  font-style: italic;
+}
+
+.hero p {
+  max-width: 38rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #d8c3ad;
+}
+
+.heroActions,
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.primaryAction,
+.secondaryAction,
+.ctaPrimary,
+.ctaSecondary {
+  border: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 900;
+  transition: transform 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.primaryAction,
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #f59e0b 0%, #ffc174 100%);
+  color: #613b00;
+}
+
+.secondaryAction,
+.ctaSecondary {
+  padding: 1rem 1.5rem;
+  background: #2a2a2a;
+  color: #e2e2e2;
+}
+
+.primaryAction:hover,
+.secondaryAction:hover,
+.ctaPrimary:hover,
+.ctaSecondary:hover,
+.footerIcons button:hover {
+  transform: translateY(-1px);
+}
+
+.heroVisual {
+  display: flex;
+  justify-content: center;
+}
+
+.heroCard {
+  position: relative;
+  width: 100%;
+  max-width: 42rem;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgba(83, 68, 52, 0.25);
+  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
+  background: #1b1b1b;
+}
+
+.heroCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(131, 85, 0, 0.15), transparent 50%, rgba(255, 193, 116, 0.08));
+}
+
+.liveTag {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.4rem 0.7rem;
+  background: #ffc174;
+  color: #613b00;
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.heroStats {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  backdrop-filter: blur(20px);
+  background: rgba(31, 31, 31, 0.75);
+  border: 1px solid rgba(83, 68, 52, 0.15);
+}
+
+.heroStats p {
+  margin: 0;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #ffc174;
+}
+
+.heroStats strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.precisionBox {
+  text-align: right;
+}
+
+.precisionBox strong {
+  font-size: 1.8rem;
+  color: #ffc174;
+}
+
+.precisionBox span {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #d8c3ad;
+}
+
+.pillarsSection,
+.ctaSection {
+  padding: 5rem 2rem;
+}
+
+.pillarsSection {
+  background: #0e0e0e;
+}
+
+.sectionInner {
+  max-width: 90rem;
+  margin: 0 auto;
+}
+
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.pillarCard {
+  padding: 2rem;
+  background: #1b1b1b;
+  border: 1px solid rgba(83, 68, 52, 0.15);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.pillarCard:hover {
+  border-color: rgba(255, 193, 116, 0.35);
+  transform: translateY(-2px);
+}
+
+.pillarIcon {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 193, 116, 0.1);
+  color: #ffc174;
+}
+
+.pillarCard h3 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.pillarCard p {
+  margin: 0 0 1.5rem;
+  color: #d8c3ad;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.pillarLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffc174;
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  text-decoration: none;
+}
+
+.ctaSection {
+  border-top: 1px solid rgba(83, 68, 52, 0.15);
+  text-align: center;
+}
+
+.ctaSection h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.08em;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.ctaSection h2 span {
+  color: #ffc174;
+  font-style: italic;
+}
+
+.ctaNote {
+  margin-top: 1.5rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(216, 195, 173, 0.5);
+}
+
+.footer {
+  padding: 2.5rem 2rem 3rem;
+  background: #0e0e0e;
+  border-top: 1px solid rgba(83, 68, 52, 0.08);
+}
+
+.footerInner {
+  max-width: 90rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.footerBrand {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  color: #ffc174;
+  font-size: 1.1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(216, 195, 173, 0.65);
+}
+
+.footerLinks,
+.footerIcons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footerLinks a {
+  color: #d8c3ad;
+  text-decoration: none;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+}
+
+.footerIcons button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(83, 68, 52, 0.25);
+  background: transparent;
+  color: #d8c3ad;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    grid-template-columns: 1.05fr 0.95fr;
+    padding-inline: 2.5rem;
+  }
+
+  .pillarsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footerInner {
+    grid-template-columns: 1.3fr 1fr auto;
+  }
+}

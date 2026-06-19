@@ -1,0 +1,120 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.card {
+  background: #1f1f1f;
+  border: 1px solid rgba(255, 193, 116, 0.25);
+  border-radius: 1rem;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 22rem;
+  width: 90%;
+  text-align: center;
+}
+
+.trophy {
+  font-size: 3rem;
+  color: #ffc174;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #e2e2e2;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  color: #a08e7a;
+  margin: 0 0 0.75rem;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.btnFinish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: #ffc174;
+  color: #131313;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 800;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btnFinish:hover:not(:disabled) {
+  background: #ffcf8f;
+}
+
+.btnFinish:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnUndo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  color: #d8c3ad;
+  border: 1px solid rgba(83, 68, 52, 0.5);
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btnUndo:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(83, 68, 52, 0.8);
+}
+
+.btnUndo:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.spin {
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

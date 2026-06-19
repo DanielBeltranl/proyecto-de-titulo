@@ -1,0 +1,108 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.label {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #a08e7a;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.required {
+    color: #f59e0b;
+    font-size: 0.75rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en móvil */
+    gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 columnas en desktop */
+    }
+}
+
+.roleButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    outline: none;
+}
+
+/* ESTADO INACTIVO */
+.unselected {
+    background-color: rgba(53, 53, 53, 0.4);
+    border: 1px solid transparent;
+    color: #52525b; /* Zinc-500 */
+}
+
+.unselected:hover {
+    border-color: #534434; /* outline-variant */
+    background-color: rgba(53, 53, 53, 0.6);
+}
+
+.unselected .icon {
+    color: #52525b;
+}
+
+/* ESTADO ACTIVO (Seleccionado) */
+.selected {
+    background-color: #f59e0b; /* primary-container */
+    border: 1px solid #f59e0b;
+    color: #472a00; /* on-primary */
+    /* Resplandor sutil */
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+    transform: translateY(-2px);
+}
+
+.selected .icon {
+    color: #472a00;
+}
+
+.icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.roleLabel {
+    font-size: 0.625rem; /* 10px */
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.05em; /* tracking-tighter */
+}
+
+.errorMessage {
+    font-size: 0.65rem;
+    color: #ffb4ab;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.2rem;
+    font-family: 'Manrope', sans-serif;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}

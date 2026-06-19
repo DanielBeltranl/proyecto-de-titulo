@@ -1,0 +1,78 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    font-family: 'Manrope', sans-serif;
+}
+
+.playerRow {
+    height: 12rem;
+    display: flex;
+    align-items: center;
+}
+
+.bgDark {
+    background-color: #1f1f1f;
+}
+
+.bgLight {
+    background-color: #1b1b1b;
+}
+
+.infoWrapper {
+    padding: 0 2rem;
+    width: 100%;
+}
+
+@keyframes serverIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.serverLabel {
+    display: block;
+    color: #f59e0b;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    margin-bottom: 0.5rem;
+    transition: opacity 150ms ease-in;
+}
+
+.visible {
+    opacity: 1;
+    animation: serverIn 200ms ease-out 50ms both;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .visible {
+        animation: none;
+    }
+}
+
+.playerName {
+    font-size: 2.25rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    .playerName {
+        font-size: 3rem;
+    }
+}
+
+.textActive {
+    color: #e2e2e2;
+}
+
+.textDimmed {
+    color: #d8c3ad;
+}

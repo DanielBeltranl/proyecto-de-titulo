@@ -1,0 +1,177 @@
+.feedback {
+  min-height: 100vh;
+  background: #131313;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: #d8c3ad;
+  font-family: 'Manrope', sans-serif;
+}
+
+.feedback .material-symbols-outlined {
+  font-size: 3rem;
+  color: #ffc174;
+}
+
+.feedback p {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  max-width: 24rem;
+  margin: 0;
+}
+
+.page {
+  min-height: 100vh;
+  background: #131313;
+  color: #e2e2e2;
+  font-family: 'Manrope', sans-serif;
+}
+
+.main {
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 3rem 1rem 4rem;
+}
+
+.bentoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.colSmall,
+.colLarge,
+.colFull {
+  width: 100%;
+}
+
+.exportBar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1rem 0;
+  max-width: 90rem;
+  margin: 0 auto;
+}
+
+.playerToggleWrap {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 1rem 0;
+  max-width: 90rem;
+  margin: 0 auto 2rem;
+}
+
+.playerToggle {
+  display: flex;
+  background: #1b1b1b;
+  border: 1px solid rgba(83, 68, 52, 0.25);
+  border-radius: 9999px;
+  padding: 0.25rem;
+  gap: 0.25rem;
+}
+
+.togglePill {
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #6b5e4e;
+  font-family: 'Manrope', sans-serif;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.togglePill:hover:not(.togglePillActive) {
+  color: #d8c3ad;
+}
+
+.togglePillActive {
+  background: #f59e0b;
+  color: #2a1700;
+  cursor: default;
+}
+
+.exportBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #2a2a2a;
+  color: #d8c3ad;
+  border: 1px solid rgba(83, 68, 52, 0.4);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.exportBtn:hover:not(:disabled) {
+  background: #383838;
+}
+
+.exportBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.exportBtn .material-symbols-outlined {
+  font-size: 1.1rem;
+}
+
+.footer {
+  padding: 3rem 1rem;
+  background: #0e0e0e;
+  border-top: 1px solid rgba(83, 68, 52, 0.1);
+  text-align: center;
+}
+
+.footerBrand {
+  font-size: 1.25rem;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.03em;
+  color: rgba(83, 68, 52, 0.4);
+  margin: 0 0 0.5rem 0;
+}
+
+.footerSub {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  color: #d8c3ad;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding: 3rem 2rem 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bentoGrid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .colSmall {
+    grid-column: span 4;
+  }
+
+  .colLarge {
+    grid-column: span 8;
+  }
+
+  .colFull {
+    grid-column: span 12;
+  }
+}
