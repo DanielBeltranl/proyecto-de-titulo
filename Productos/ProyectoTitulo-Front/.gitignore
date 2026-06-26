@@ -16,6 +16,9 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+.skills-lock.json
+CLAUDE.md
+GUIA_VERIFICACION_CAMBIOS.md
 
 # Editor directories and files
 .vscode/*

@@ -2,3 +2,8 @@
 .env
 __pycache__/
 *.pyc
+.claude
+.idea
+.atl
+.agents
+CLAUDE.md

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="R5DCZX-Ljx8vhj8-1OT_">
+    <mxGraphModel dx="2241" dy="749" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-1" parent="1" style="swimlane;startSize=30;fillColor=#f0fff0;strokeColor=#82b366;fontStyle=1;fontSize=13;html=1;" value="MatchData — Ciclo de vida del partido" vertex="1">
+          <mxGeometry height="680" width="670" x="20" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-2" parent="2YTpBO9pBJUQrCxz3QvJ-1" style="ellipse;fillColor=#000000;strokeColor=#000000;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="24" width="24" x="315" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-3" parent="2YTpBO9pBJUQrCxz3QvJ-1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=13;" value="PENDIENTE" vertex="1">
+          <mxGeometry height="50" width="196" x="228" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-4" parent="2YTpBO9pBJUQrCxz3QvJ-1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" value="ACEPTADO" vertex="1">
+          <mxGeometry height="50" width="196" x="228" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-5" parent="2YTpBO9pBJUQrCxz3QvJ-1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=13;strokeWidth=2;" value="RECHAZADO" vertex="1">
+          <mxGeometry height="50" width="160" x="468" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-6" parent="2YTpBO9pBJUQrCxz3QvJ-1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" value="INICIADO" vertex="1">
+          <mxGeometry height="50" width="196" x="228" y="345" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-7" parent="2YTpBO9pBJUQrCxz3QvJ-1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=13;" value="PAUSADO" vertex="1">
+          <mxGeometry height="50" width="160" x="500" y="345" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-8" parent="2YTpBO9pBJUQrCxz3QvJ-1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#006600;fontStyle=1;fontSize=13;strokeWidth=2;" value="FINALIZADA" vertex="1">
+          <mxGeometry height="50" width="196" x="228" y="465" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-9" parent="2YTpBO9pBJUQrCxz3QvJ-1" style="shape=doubleEllipse;fillColor=#000000;strokeColor=#000000;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="24" width="24" x="315" y="565" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-10" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-1" source="2YTpBO9pBJUQrCxz3QvJ-2" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-3" value="crear partido">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-11" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-1" source="2YTpBO9pBJUQrCxz3QvJ-3" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-4" value="aceptar invitación&#xa;[PATCH /accept/]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-12" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-1" source="2YTpBO9pBJUQrCxz3QvJ-3" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-5" value="rechazar invitación&#xa;[DELETE /reject/]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-13" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-1" source="2YTpBO9pBJUQrCxz3QvJ-4" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-6" value="iniciar partido&#xa;[PATCH /start/]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-14" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-1" source="2YTpBO9pBJUQrCxz3QvJ-6" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-7" value="pausar&#xa;[PATCH /pause/]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-15" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-1" source="2YTpBO9pBJUQrCxz3QvJ-7" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-6" value="reanudar&#xa;[PATCH /resume/]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-16" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-1" source="2YTpBO9pBJUQrCxz3QvJ-19" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=0;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-6" value="registrar punto [POST /point/]&#xa;deshacer punto [DELETE /point/undo/]">
+          <mxGeometry relative="1" x="0.0116" y="-20" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="10" y="288" />
+              <mxPoint x="10" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-17" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-1" source="2YTpBO9pBJUQrCxz3QvJ-6" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-8" value="finalizar partido&#xa;[PATCH /finish/]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-18" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-1" source="2YTpBO9pBJUQrCxz3QvJ-8" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-9" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-20" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-1" source="2YTpBO9pBJUQrCxz3QvJ-19" style="endArrow=open;endFill=0;dashed=1;strokeColor=#999900;" target="2YTpBO9pBJUQrCxz3QvJ-6" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-47" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-1" source="2YTpBO9pBJUQrCxz3QvJ-6" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=0;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-19" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="248" y="380" as="sourcePoint" />
+            <mxPoint x="248" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-19" parent="2YTpBO9pBJUQrCxz3QvJ-1" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=14;fillColor=#ffffcc;strokeColor=#999900;fontSize=10;align=left;" value="⚠ Cierre inesperado del navegador&#xa;→ [GET /recovery/] restaura el estado" vertex="1">
+          <mxGeometry height="60" width="160" x="40" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-21" parent="1" style="swimlane;startSize=30;fillColor=#fff8f0;strokeColor=#d79b00;fontStyle=1;fontSize=13;html=1;" value="SolicitudAsociacion — Solicitud de coaching" vertex="1">
+          <mxGeometry height="340" width="460" x="720" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-22" parent="2YTpBO9pBJUQrCxz3QvJ-21" style="ellipse;fillColor=#000000;strokeColor=#000000;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="24" width="24" x="218" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-23" parent="2YTpBO9pBJUQrCxz3QvJ-21" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=13;" value="PENDIENTE" vertex="1">
+          <mxGeometry height="50" width="196" x="132" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-24" parent="2YTpBO9pBJUQrCxz3QvJ-21" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#006600;fontStyle=1;fontSize=13;strokeWidth=2;" value="ACEPTADA" vertex="1">
+          <mxGeometry height="50" width="160" x="40" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-25" parent="2YTpBO9pBJUQrCxz3QvJ-21" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=13;strokeWidth=2;" value="RECHAZADA" vertex="1">
+          <mxGeometry height="50" width="160" x="260" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-26" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-21" source="2YTpBO9pBJUQrCxz3QvJ-22" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-23" value="enviar solicitud&#xa;[POST /coaching/solicitudes/]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-27" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-21" source="2YTpBO9pBJUQrCxz3QvJ-23" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-24" value="entrenador acepta&#xa;[PATCH /aceptar/]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-28" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-21" source="2YTpBO9pBJUQrCxz3QvJ-23" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=0.7;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-25" value="entrenador rechaza&#xa;[PATCH /rechazar/]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-29" parent="1" style="swimlane;startSize=30;fillColor=#f5f0ff;strokeColor=#9673a6;fontStyle=1;fontSize=13;html=1;" value="Friendship — Solicitud de amistad" vertex="1">
+          <mxGeometry height="310" width="460" x="720" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-30" parent="2YTpBO9pBJUQrCxz3QvJ-29" style="ellipse;fillColor=#000000;strokeColor=#000000;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="24" width="24" x="218" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-31" parent="2YTpBO9pBJUQrCxz3QvJ-29" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=13;" value="PENDIENTE" vertex="1">
+          <mxGeometry height="50" width="196" x="132" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-32" parent="2YTpBO9pBJUQrCxz3QvJ-29" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#006600;fontStyle=1;fontSize=13;strokeWidth=2;" value="ACEPTADO" vertex="1">
+          <mxGeometry height="50" width="160" x="40" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-33" parent="2YTpBO9pBJUQrCxz3QvJ-29" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=13;strokeWidth=2;" value="RECHAZO" vertex="1">
+          <mxGeometry height="50" width="160" x="260" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-34" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-29" source="2YTpBO9pBJUQrCxz3QvJ-30" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-31" value="enviar solicitud de amistad&#xa;[POST /friends/request/]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-35" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-29" source="2YTpBO9pBJUQrCxz3QvJ-31" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-32" value="aceptar&#xa;[PATCH /accept/]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-36" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-29" source="2YTpBO9pBJUQrCxz3QvJ-31" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=0.7;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-33" value="rechazar solicitud&#xa;[DELETE /reject/]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2YTpBO9pBJUQrCxz3QvJ-37" edge="1" parent="2YTpBO9pBJUQrCxz3QvJ-29" source="2YTpBO9pBJUQrCxz3QvJ-32" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;fontSize=10;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="2YTpBO9pBJUQrCxz3QvJ-33" value="Rechaza Solicitud&#xa;[DELETE /friends/{pk}/]">
+          <mxGeometry relative="1" y="-35" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="240" y="245" />
+              <mxPoint x="240" y="245" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
