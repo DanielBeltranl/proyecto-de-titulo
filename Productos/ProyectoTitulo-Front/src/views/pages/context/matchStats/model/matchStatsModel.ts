@@ -2,12 +2,22 @@ import api from '../../../../../api/axios';
 import { obtenerEstadisticasPartido, obtenerDatosPartido, obtenerDetallePartido } from '../../../../../services/usuarioService';
 
 // --- Raw API types ---
+interface ApiBreakPoints {
+  generated: number;
+  converted: number;
+  conversion_pct: number;
+  faced: number;
+  saved: number;
+  save_pct: number;
+}
+
 interface ApiMatchStats {
   match_duration: string | null;
-  points_win_loss: { won: number; lost: number; total: number; won_pct: number; lost_pct: number };
+  points_win_loss: { won: number; lost: number; total: number; lost_pct: number };
   avg_duration_won: string | null;
   avg_duration_lost: string | null;
-  break_points: { generated: number; converted: number; conversion_pct: number; faced: number; saved: number; save_pct: number };
+  break_points: ApiBreakPoints;
+  match_points: ApiBreakPoints;
   total_distance: number;
   quartiles: Array<{ quartile: number; color: string; min_duration: number; max_duration: number; count: number; pct: number }>;
   points_per_interval: Array<{ interval: number; points_won: number }>;
@@ -15,7 +25,7 @@ interface ApiMatchStats {
 }
 
 interface ApiCoachStatsItem extends ApiMatchStats {
-  player_id: number;
+  player_id: string;
   nombre: string;
   apellidoPaterno: string;
 }
@@ -56,6 +66,8 @@ export interface MatchStatsData {
   effectivenessPct: number;
   breakPointsFavorable: BreakPoints;
   breakPointsAgainst: BreakPoints;
+  matchPointsFavorable: BreakPoints;
+  matchPointsAgainst: BreakPoints;
   trend: TrendInterval[];
   pointDuration: PointDurationStats;
 }
@@ -79,9 +91,11 @@ const transform = (stats: ApiMatchStats, match: ApiMatchData): MatchStatsData =>
   distanceKm: stats.total_distance / 1000,
   pointsWon: stats.points_win_loss.won,
   pointsLost: stats.points_win_loss.lost,
-  effectivenessPct: Math.round(stats.points_win_loss.won_pct),
+  effectivenessPct: Math.round(100 - stats.points_win_loss.lost_pct),
   breakPointsFavorable: { won: stats.break_points.converted, total: stats.break_points.generated },
   breakPointsAgainst: { won: stats.break_points.saved, total: stats.break_points.faced },
+  matchPointsFavorable: { won: stats.match_points.converted, total: stats.match_points.generated },
+  matchPointsAgainst: { won: stats.match_points.saved, total: stats.match_points.faced },
   trend: stats.points_per_interval.map(p => ({ minute: p.interval, pointsWon: p.points_won })),
   pointDuration: {
     quartiles: [1, 2, 3, 4].map(n => {
@@ -101,9 +115,11 @@ const transformCoachItem = (item: ApiCoachStatsItem, uuid: string): MatchStatsDa
   distanceKm: item.total_distance / 1000,
   pointsWon: item.points_win_loss.won,
   pointsLost: item.points_win_loss.lost,
-  effectivenessPct: Math.round(item.points_win_loss.won_pct),
+  effectivenessPct: Math.round(100 - item.points_win_loss.lost_pct),
   breakPointsFavorable: { won: item.break_points.converted, total: item.break_points.generated },
   breakPointsAgainst: { won: item.break_points.saved, total: item.break_points.faced },
+  matchPointsFavorable: { won: item.match_points.converted, total: item.match_points.generated },
+  matchPointsAgainst: { won: item.match_points.saved, total: item.match_points.faced },
   trend: item.points_per_interval.map(p => ({ minute: p.interval, pointsWon: p.points_won })),
   pointDuration: {
     quartiles: [1, 2, 3, 4].map(n => {

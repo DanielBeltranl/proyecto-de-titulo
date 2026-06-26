@@ -32,11 +32,11 @@
 }
 
 .roundedTopRight {
-    border-top-right-radius: 1rem;
+    border-top-right-radius: 0;
 }
 
 .roundedBottomRight {
-    border-bottom-right-radius: 1rem;
+    border-bottom-right-radius: 0;
 }
 
 @keyframes scoreIn {
@@ -92,5 +92,31 @@
     .scoreValue,
     .breakBadge {
         animation: none;
+    }
+}
+
+/* --- CELULAR LANDSCAPE compacto: esta celda es la de mayor impacto en
+   altura (12rem) y tamanio de fuente (4.5rem), se comprime fuerte --- */
+@media (orientation: landscape) and (max-height: 500px) {
+    .pointsCell {
+        height: 4rem;
+        width: 3.5rem;
+        font-size: 1.5rem;
+    }
+
+    .breakBadge {
+        top: 0.15rem;
+        right: 0.15rem;
+        font-size: 0.45rem;
+        padding: 0.05rem 0.2rem;
+    }
+}
+
+/* --- TABLET LANDSCAPE: intermedio --- */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+    .pointsCell {
+        height: 6rem;
+        width: 6rem;
+        font-size: 2.5rem;
     }
 }

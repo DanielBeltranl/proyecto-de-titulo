@@ -65,6 +65,11 @@
     }
 }
 
+/* ─── Wide container (role selector only) ── */
+.formContainerWide {
+    max-width: 960px;
+}
+
 /* ─── Role Selector ──────────────────────── */
 .roleSelector {
     display: flex;
@@ -189,6 +194,83 @@
     letter-spacing: 0.05em;
 }
 
+/* ─── Form Header ────────────────────── */
+.formHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.formHeaderBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    background: rgba(255, 193, 116, 0.1);
+    border: 1px solid rgba(255, 193, 116, 0.25);
+    border-radius: 999px;
+    color: #ffc174;
+    font-size: 0.65rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    width: fit-content;
+}
+
+.formHeaderBadge .material-symbols-outlined {
+    font-size: 0.9rem;
+}
+
+.formTitle {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: #e2e2e2;
+}
+
+.formSubtitle {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #a08e7a;
+    line-height: 1.6;
+    max-width: 38rem;
+}
+
+/* ─── Section Label ──────────────────── */
+.formSectionLabel {
+    margin: 1.5rem 0 1rem;
+    font-size: 0.62rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #ffc174;
+}
+
+/* ─── Error Banner ───────────────────── */
+.errorBanner {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    background: rgba(255, 100, 100, 0.08);
+    border: 1px solid rgba(255, 100, 100, 0.25);
+    border-radius: 0.5rem;
+    color: #ffb4ab;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.errorBanner .material-symbols-outlined {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
 /* ─── Back Button ────────────────────── */
 .backButtonWrapper {
     display: flex;
@@ -224,6 +306,181 @@
     flex: 1;
 }
 
+/* ─── Pricing Plans ──────────────────────── */
+.plansGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .plansGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.planCard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.75rem;
+    background: rgba(27, 27, 27, 0.8);
+    border: 1px solid rgba(255, 193, 116, 0.15);
+    border-radius: 1rem;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.planCard:hover {
+    border-color: rgba(255, 193, 116, 0.5);
+    transform: translateY(-2px);
+}
+
+.planCardFeatured {
+    border-color: #ffc174;
+    background: rgba(42, 30, 10, 0.7);
+}
+
+.planBadge {
+    position: absolute;
+    top: -0.65rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.2rem 0.8rem;
+    background: #ffc174;
+    color: #613b00;
+    font-size: 0.62rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.planName {
+    font-size: 0.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #a08e7a;
+}
+
+.planPrice {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+}
+
+.planPrice strong {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ffc174;
+    line-height: 1;
+}
+
+.planPrice span {
+    font-size: 0.7rem;
+    color: #a08e7a;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.planDescription {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #d8c3ad;
+    line-height: 1.6;
+    flex: 1;
+}
+
+.planCta {
+    margin-top: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: rgba(255, 193, 116, 0.08);
+    border: 1px solid rgba(255, 193, 116, 0.25);
+    color: #ffc174;
+    font-size: 0.65rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border-radius: 0.5rem;
+    text-align: center;
+    transition: background 0.2s ease;
+}
+
+.planCard:hover .planCta,
+.planCardFeatured .planCta {
+    background: rgba(255, 193, 116, 0.18);
+}
+
+/* ─── Player Section ─────────────────────── */
+.playerDivider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    color: #a08e7a;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.playerDivider::before,
+.playerDivider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.playerButton {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 0.75rem;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.playerButton:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.playerButton .material-symbols-outlined {
+    font-size: 1.5rem;
+    color: #a08e7a;
+    flex-shrink: 0;
+}
+
+.playerButtonLabel {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #d8c3ad;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.playerButtonNote {
+    display: block;
+    font-size: 0.75rem;
+    color: #a08e7a;
+    margin-top: 0.25rem;
+    line-height: 1.5;
+}
+
+/* ─── Metrics ────────────────────────────── */
 .metricsTitle {
     font-size: 0.875rem;
     font-weight: 700;

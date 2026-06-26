@@ -28,3 +28,11 @@
     border-color: #e2e2e2;
     color: #e2e2e2;
 }
+
+/* --- CELULAR LANDSCAPE compacto --- */
+@media (orientation: landscape) and (max-height: 500px) {
+    .button {
+        padding: 0.4rem 1rem;
+        font-size: 0.7rem;
+    }
+}

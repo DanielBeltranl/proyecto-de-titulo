@@ -31,6 +31,28 @@ const BEST_OF_LABELS: Record<BestOf, string> = {
   5: 'Al mejor de 5 sets',
 };
 
+const SURFACE_COLORS: Record<Surface, string> = {
+  Clay: '#c9622a',
+  Hard: '#4a90d9',
+  Grass: '#5a9c5a',
+};
+
+const DEFAULT_HERO_BACKGROUND = '#1f1f1f';
+
+const hexToRgba = (hex: string, alpha: number): string => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+
+const getSurfaceBackground = (surface: Surface): string => {
+  const color = SURFACE_COLORS[surface];
+  if (!color) return DEFAULT_HERO_BACKGROUND;
+  const tint = hexToRgba(color, 0.22);
+  return `linear-gradient(${tint}, ${tint}), ${DEFAULT_HERO_BACKGROUND}`;
+};
+
 const formatDate = (iso: string): string => {
   const d = new Date(iso);
   return d.toLocaleDateString('es-CL', {
@@ -226,7 +248,7 @@ const MatchDetail: React.FC = () => {
         </div>
 
         {/* Hero: players vs */}
-        <div className={styles.heroSection}>
+        <div className={styles.heroSection} style={{ background: getSurfaceBackground(match.surface) }}>
           <div className={styles.playerSide}>
             <div className={styles.playerAvatar}>
               <span className="material-symbols-outlined">person</span>

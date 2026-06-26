@@ -19,7 +19,7 @@
 
 .feedback .material-symbols-outlined {
   font-size: 3rem;
-  color: #ffc174;
+  color: #ffb300;
 }
 
 .feedback p {
@@ -74,7 +74,7 @@
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #ffc174;
+  color: #ffb300;
   margin-bottom: 0.5rem;
 }
 
@@ -86,6 +86,12 @@
   text-transform: uppercase;
   color: #e2e2e2;
   margin: 0;
+}
+
+.headerHint {
+  color: #a08e7a;
+  font-size: 0.875rem;
+  margin: 0.5rem 0 0;
 }
 
 .grid {

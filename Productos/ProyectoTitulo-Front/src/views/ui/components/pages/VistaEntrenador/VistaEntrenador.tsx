@@ -96,6 +96,19 @@ const VistaEntrenador = () => {
                 Ve los partidos que has agendado tú y a los que tus alumnos han sido invitados.
               </p>
             </div>
+
+            <div className="trainer-cta">
+              <button
+                type="button"
+                className="trainer-cta-button"
+                onClick={() => navigate('/contactos?tab=friends')}
+              >
+                Ver mis alumnos
+              </button>
+              <p className="trainer-cta-message">
+                Puedes ver los alumnos bajo tu mando y sus estadísticas.
+              </p>
+            </div>
           </div>
         </div>
       </section>

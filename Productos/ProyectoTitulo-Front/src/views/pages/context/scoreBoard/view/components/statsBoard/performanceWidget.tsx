@@ -20,14 +20,25 @@ export interface PlayerPerformanceData {
 interface PerformanceWidgetProps {
     player1: PlayerPerformanceData;
     player2: PlayerPerformanceData;
+    lastUpdated?: Date | null;
 }
 
-export const PerformanceWidget = ({ player1, player2 }: PerformanceWidgetProps) => {
+const formatLastUpdated = (date: Date): string =>
+    date.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+export const PerformanceWidget = ({ player1, player2, lastUpdated }: PerformanceWidgetProps) => {
     return (
         <div className={styles.widgetContainer}>
             <div className={styles.headerSection}>
                 <h3 className={styles.headerTitle}>RENDIMIENTO (VS)</h3>
-                <span className={styles.badge}>REAL-TIME DATA</span>
+                <div className={styles.headerRight}>
+                    <span className={styles.badge}>REAL-TIME DATA</span>
+                    {lastUpdated && (
+                        <span className={styles.lastUpdated}>
+                            Última actualización: {formatLastUpdated(lastUpdated)}
+                        </span>
+                    )}
+                </div>
             </div>
             <div className={styles.contentSection}>
                 <PlayerMatchup p1={player1} p2={player2} />

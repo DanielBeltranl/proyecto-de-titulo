@@ -72,6 +72,24 @@
     to { transform: rotate(360deg); }
 }
 
+/* --- CELULAR LANDSCAPE (compacto): el bloque marcador+botones debe entrar
+   sin scroll en alturas tipicas de telefono acostado (~320-500px de alto) --- */
+@media (orientation: landscape) and (max-height: 500px) {
+    .container {
+        gap: 0.375rem;
+        margin: 0.375rem;
+    }
+}
+
+/* --- TABLET LANDSCAPE: tamanio intermedio, mas aire que celular pero
+   todavia en columna (el grid de 2 columnas queda reservado a desktop) --- */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+    .container {
+        gap: 0.75rem;
+        margin: 0.75rem;
+    }
+}
+
 @media (min-width: 1024px) and (min-height: 600px) {
     .fullContainer {
         display: grid;

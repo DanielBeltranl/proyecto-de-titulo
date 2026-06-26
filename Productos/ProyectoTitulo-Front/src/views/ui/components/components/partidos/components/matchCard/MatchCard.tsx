@@ -30,6 +30,28 @@ const SURFACE_STYLE: Record<Surface, string> = {
   Grass: styles.surfaceGrass,
 };
 
+const SURFACE_COLORS: Record<Surface, string> = {
+  Clay: '#c9622a',
+  Hard: '#4a90d9',
+  Grass: '#5a9c5a',
+};
+
+const DEFAULT_CARD_BACKGROUND = '#1f1f1f';
+
+const hexToRgba = (hex: string, alpha: number): string => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+
+const getSurfaceBackground = (surface: Surface): string => {
+  const color = SURFACE_COLORS[surface];
+  if (!color) return DEFAULT_CARD_BACKGROUND;
+  const tint = hexToRgba(color, 0.22);
+  return `linear-gradient(${tint}, ${tint}), ${DEFAULT_CARD_BACKGROUND}`;
+};
+
 const formatDate = (iso: string): string =>
   new Date(iso).toLocaleDateString('es-CL', {
     day: 'numeric',
@@ -40,6 +62,7 @@ const formatDate = (iso: string): string =>
 interface MatchCardProps {
   match: MatchItem;
   rivalLabel: string;
+  rivalRoleLabel: string;
   onClick: () => void;
   onAccept?: () => void;
   showStartCta?: boolean;
@@ -52,6 +75,7 @@ interface MatchCardProps {
 const MatchCard: React.FC<MatchCardProps> = ({
   match,
   rivalLabel,
+  rivalRoleLabel,
   onClick,
   onAccept,
   showStartCta,
@@ -63,7 +87,7 @@ const MatchCard: React.FC<MatchCardProps> = ({
   const hasActions = Boolean(onAccept || showStartCta || showWaitingCta || showScoreCta || showContinueCta);
 
   return (
-    <article className={styles.card}>
+    <article className={styles.card} style={{ background: getSurfaceBackground(match.surface) }}>
       <div
         className={styles.cardBody}
         onClick={onClick}
@@ -77,7 +101,7 @@ const MatchCard: React.FC<MatchCardProps> = ({
               <span className="material-symbols-outlined">person</span>
             </div>
             <div className={styles.rivalInfo}>
-              <span className={styles.rivalLabel}>Alumno</span>
+              <span className={styles.rivalLabel}>{rivalRoleLabel}</span>
               <span className={styles.rivalName}>{rivalLabel}</span>
             </div>
           </div>

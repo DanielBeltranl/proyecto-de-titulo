@@ -2,7 +2,6 @@ import {
   obtenerPartidosCreados,
   obtenerPartidosInvitado,
   obtenerPartidosAgendados,
-  obtenerPartidosCoachCreados,
   obtenerInvitacionesJugadoresCoach,
   aceptarInvitacionPartido,
 } from '../../../../../../services/usuarioService';
@@ -76,48 +75,6 @@ export const fetchPartidosAgendados = async (): Promise<MatchItem[]> => {
   const response = await obtenerPartidosAgendados();
   const data: ScheduleItem[] = Array.isArray(response.data) ? response.data : [];
   return data.map(mapScheduleToMatchItem);
-};
-
-export interface CoachCreatedItem {
-  id_match: string;
-  entrenador: MatchPlayer | null;
-  local_player: MatchPlayer;
-  invited: MatchPlayer | null;
-  guest_name: string | null;
-  location: string;
-  surface: Surface;
-  best_of: 1 | 3 | 5;
-  match_state: MatchState;
-  scheduled_at: string;
-  score: null | object;
-  created_at: string;
-  updated_at: string;
-}
-
-const mapCoachCreatedToMatchItem = (item: CoachCreatedItem): MatchItem => ({
-  id_match: item.id_match,
-  creator: item.local_player,
-  invited: item.invited ?? {
-    id: 0,
-    nombre: item.guest_name ?? 'Invitado externo',
-    apellidoPaterno: '',
-    correo: '',
-  },
-  location: item.location,
-  surface: item.surface,
-  best_of: item.best_of,
-  match_state: item.match_state,
-  score: item.score,
-  created_at: item.scheduled_at,
-  updated_at: item.updated_at,
-});
-
-export const fetchPartidosCoachCreados = async (): Promise<MatchItem[]> => {
-  const response = await obtenerPartidosCoachCreados();
-  const data: CoachCreatedItem[] = Array.isArray(response.data) ? response.data : [];
-  return data
-    .map(mapCoachCreatedToMatchItem)
-    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 };
 
 export interface CoachInvitationItem {

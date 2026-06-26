@@ -76,3 +76,39 @@
 .textDimmed {
     color: #d8c3ad;
 }
+
+/* --- CELULAR LANDSCAPE compacto: altura fija de 12rem es lo que mas
+   empuja el bloque fuera de pantalla, se reduce agresivamente --- */
+@media (orientation: landscape) and (max-height: 500px) {
+    .playerRow {
+        height: 4rem;
+    }
+
+    .infoWrapper {
+        padding: 0 1rem;
+    }
+
+    .serverLabel {
+        font-size: 0.55rem;
+        margin-bottom: 0.15rem;
+    }
+
+    .playerName {
+        font-size: 1.25rem;
+    }
+}
+
+/* --- TABLET LANDSCAPE: intermedio entre 4rem (celular) y 12rem (desktop) --- */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+    .playerRow {
+        height: 6rem;
+    }
+
+    .infoWrapper {
+        padding: 0 1.5rem;
+    }
+
+    .playerName {
+        font-size: 1.75rem;
+    }
+}

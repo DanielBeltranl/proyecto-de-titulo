@@ -145,10 +145,6 @@ export default function FormLogin() {
                     </div>
 
                     <div className={styles.footerLinks}>
-                        <a href="/forgot-password" className={styles.link}>
-                            ¿Olvidaste tu contraseña?
-                        </a>
-                        <span className={styles.separator}>•</span>
                         <a href="/register" className={styles.link}>
                             Registrarse
                         </a>

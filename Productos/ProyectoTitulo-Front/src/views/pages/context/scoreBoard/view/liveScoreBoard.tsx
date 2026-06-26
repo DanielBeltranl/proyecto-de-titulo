@@ -17,6 +17,7 @@ import { OrientationOverlay } from "./components/orientationOverlay/orientationO
 import { ButtonGrid } from "./components/buttonGrid/buttonGrid.tsx";
 import { PerformanceWidget } from "./components/statsBoard/performanceWidget.tsx";
 import { MatchEndModal } from "./components/matchEndModal/MatchEndModal.tsx";
+import { TimerRequiredModal } from "./components/timerRequiredModal/TimerRequiredModal.tsx";
 
 const buildFallbackStats = (name: string, breakPointsSub: string) => ({
     name, image: "", distance: "N/A", distanceWidth: "50%",
@@ -26,8 +27,8 @@ const buildFallbackStats = (name: string, breakPointsSub: string) => ({
 
 export const LiveScoreBoard = () => {
     const { uuid = '' } = useParams<{ uuid: string }>();
-    const { state, onScoreUp, onUndo, onPause, onFinish } = useScoreBoardApi(uuid);
-    const { p1: liveP1, p2: liveP2 } = useLiveStats(uuid);
+    const { state, onScoreUp, onUndo, onFinish } = useScoreBoardApi(uuid);
+    const { p1: liveP1, p2: liveP2, lastUpdated } = useLiveStats(uuid);
 
     const [matchStatus, setMatchStatus] = useState<MatchStatus>('paused');
 
@@ -42,13 +43,9 @@ export const LiveScoreBoard = () => {
         onScoreUp(player, duration);
     };
 
-    // El toggle del MatchControlButton ahora pausa vía API cuando el match está corriendo
+    // Pausa/reanuda solo el timer local — no llama a la API ni navega
     const toggle = () => {
-        if (matchStatus === 'started') {
-            onPause();
-        } else {
-            setMatchStatus('started');
-        }
+        setMatchStatus(prev => (prev === 'started' ? 'paused' : 'started'));
     };
 
     const p1IsServing = state.servingPlayer === 'p1';
@@ -83,6 +80,7 @@ export const LiveScoreBoard = () => {
                 <OrientationOverlay />
                 <section className={styles.container}>
                     <MatchTimer
+                        uuid={uuid}
                         gameId={state.currentGameId}
                         setId={state.currentSetId}
                         matchEnded={state.matchEnded}
@@ -123,11 +121,15 @@ export const LiveScoreBoard = () => {
                             loading={state.actionLoading}
                         />
                     )}
+                    {!state.matchClosed && matchStatus === 'paused' && (
+                        <TimerRequiredModal onStart={toggle} />
+                    )}
                 </section>
                 <section className={styles.container}>
                     <PerformanceWidget
                         player1={liveP1 ?? buildFallbackStats(state.p1Name, "WON")}
                         player2={liveP2 ?? buildFallbackStats(state.p2Name, "SAVED")}
+                        lastUpdated={lastUpdated}
                     />
                 </section>
             </div>

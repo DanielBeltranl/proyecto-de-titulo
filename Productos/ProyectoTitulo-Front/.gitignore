@@ -20,6 +20,10 @@ dist-ssr
 CLAUDE.md
 GUIA_VERIFICACION_CAMBIOS.md
 
+# Claude Code
+.claude/settings.local.json
+.atl/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

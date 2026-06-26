@@ -51,6 +51,9 @@ export const GlobalStats = () => {
         <header className={styles.header}>
           <span className={styles.headerLabel}>Jugador</span>
           <h1 className={styles.headerTitle}>Estadísticas Globales</h1>
+          <p className={styles.headerHint}>
+            Estas estadísticas se calculan considerando los últimos 14 partidos.
+          </p>
         </header>
 
         <div className={styles.grid}>
@@ -65,6 +68,7 @@ export const GlobalStats = () => {
           <div className={styles.colHalf}>
             <GlobalBreakPoints
               bp={data.breakPoints}
+              mp={data.matchPoints}
               avgDurationWon={data.avgDurationWon}
               avgDurationLost={data.avgDurationLost}
             />

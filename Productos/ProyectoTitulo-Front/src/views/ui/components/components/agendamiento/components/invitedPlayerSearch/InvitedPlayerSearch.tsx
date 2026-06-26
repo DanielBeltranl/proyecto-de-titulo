@@ -5,6 +5,7 @@ import type { ExternalPlayerResult, InvitedPlayerData, InvitedType } from '../..
 
 interface InvitedPlayerSearchProps {
   onChange: (data: InvitedPlayerData) => void;
+  excludeId?: number;
 }
 
 const TAB_LABELS: Record<InvitedType, string> = {
@@ -13,7 +14,7 @@ const TAB_LABELS: Record<InvitedType, string> = {
   none: 'Sin oponente',
 };
 
-const InvitedPlayerSearch: React.FC<InvitedPlayerSearchProps> = ({ onChange }) => {
+const InvitedPlayerSearch: React.FC<InvitedPlayerSearchProps> = ({ onChange, excludeId }) => {
   const [type, setType] = useState<InvitedType>('none');
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<ExternalPlayerResult[]>([]);
@@ -74,6 +75,8 @@ const InvitedPlayerSearch: React.FC<InvitedPlayerSearchProps> = ({ onChange }) =
     onChange({ type: 'guest', guest_name: name });
   };
 
+  const visibleResults = results.filter(r => r.id !== excludeId);
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -82,6 +85,8 @@ const InvitedPlayerSearch: React.FC<InvitedPlayerSearchProps> = ({ onChange }) =
           <h2 className={styles.title}>Oponente</h2>
           <span className={styles.optional}>Opcional</span>
         </div>
+
+        <p className={styles.hint}>Ingresa los datos del oponente.</p>
 
         <div className={styles.tabs}>
           {(Object.keys(TAB_LABELS) as InvitedType[]).map(t => (
@@ -98,6 +103,11 @@ const InvitedPlayerSearch: React.FC<InvitedPlayerSearchProps> = ({ onChange }) =
 
         {type === 'registered' && (
           <div className={styles.searchWrapper}>
+            <div className={styles.dataNotice}>
+              <span className="material-symbols-outlined">info</span>
+              <p>Al elegir un jugador registrado, la información quedará disponible para todos los entrenadores involucrados.</p>
+            </div>
+
             <div className={styles.inputRow}>
               <span className="material-symbols-outlined">search</span>
               <input
@@ -116,9 +126,9 @@ const InvitedPlayerSearch: React.FC<InvitedPlayerSearchProps> = ({ onChange }) =
               )}
             </div>
 
-            {results.length > 0 && !selected && (
+            {visibleResults.length > 0 && !selected && (
               <ul className={styles.results}>
-                {results.map(r => (
+                {visibleResults.map(r => (
                   <li key={r.id} className={styles.resultItem} onClick={() => handleSelectPlayer(r)}>
                     <div className={styles.resultMain}>
                       <span className={styles.resultName}>{r.nombre} {r.apellidoPaterno}</span>
@@ -146,31 +156,27 @@ const InvitedPlayerSearch: React.FC<InvitedPlayerSearchProps> = ({ onChange }) =
                 </div>
               </div>
             )}
-
-            {selected && (
-              <div className={styles.dataNotice}>
-                <span className="material-symbols-outlined">info</span>
-                <p>La estadística de este partido quedará disponible para ambos jugadores registrados.</p>
-              </div>
-            )}
           </div>
         )}
 
         {type === 'guest' && (
-          <div className={styles.guestWrapper}>
-            <input
-              type="text"
-              className={styles.input}
-              placeholder="Nombre completo del invitado"
-              value={guestName}
-              onChange={e => handleGuestName(e.target.value)}
-            />
-            {guestName.trim() && (
-              <p className={styles.guestConfirm}>
-                Jugará como invitado: <strong>{guestName.trim()}</strong>
-              </p>
-            )}
-          </div>
+          <>
+            <p className={styles.hint}>Indica el nombre de tu rival. No se guardarán estadísticas.</p>
+            <div className={styles.guestWrapper}>
+              <input
+                type="text"
+                className={styles.input}
+                placeholder="Nombre completo del invitado"
+                value={guestName}
+                onChange={e => handleGuestName(e.target.value)}
+              />
+              {guestName.trim() && (
+                <p className={styles.guestConfirm}>
+                  Jugará como invitado: <strong>{guestName.trim()}</strong>
+                </p>
+              )}
+            </div>
+          </>
         )}
 
         {type === 'none' && (
