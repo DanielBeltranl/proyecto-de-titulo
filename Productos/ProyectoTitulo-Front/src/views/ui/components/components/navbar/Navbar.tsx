@@ -49,6 +49,11 @@ function Navbar({
   const [menuOpen, setMenuOpen] = useState(false)
   const [profileMenuOpen, setProfileMenuOpen] = useState(false)
 
+  const isEntrenador = usuario?.rol === 'Entrenador'
+  const visibleLinks = isEntrenador
+    ? links
+    : links.filter((link) => link.href !== '/agendamiento' && link.href !== '/contactos')
+
   const handleLogout = async () => {
     try {
       await logoutUsuario()
@@ -82,7 +87,7 @@ function Navbar({
           className={`top-navbar__links ${menuOpen ? 'is-open' : ''}`}
           aria-label="Navegacion principal"
         >
-          {!isAuthPage && isAuthenticated && links.map((link) => (
+          {!isAuthPage && isAuthenticated && visibleLinks.map((link) => (
             <a
               key={`${link.label}-${link.href}`}
               href={link.href}
@@ -200,7 +205,7 @@ function Navbar({
 
           {/* Links de navegación */}
           <div className="top-navbar__mobile-links">
-            {!isAuthPage && isAuthenticated && links.map((link) => (
+            {!isAuthPage && isAuthenticated && visibleLinks.map((link) => (
               <button
                 key={`${link.label}-${link.href}`}
                 className="top-navbar__mobile-link"

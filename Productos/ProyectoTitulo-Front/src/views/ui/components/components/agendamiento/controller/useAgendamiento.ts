@@ -34,6 +34,11 @@ function isInvitedValid(invited: InvitedPlayerData): boolean {
   return !!(invited.guest_name?.trim());
 }
 
+function isFutureDateTime(date: string, time: string): boolean {
+  if (!date || !time) return false;
+  return new Date(`${date}T${time}`) > new Date();
+}
+
 export const useAgendamiento = (): UseAgendamientoReturn => {
   const [form, setForm] = useState<FormState>({
     id_local_player: undefined,
@@ -77,6 +82,7 @@ export const useAgendamiento = (): UseAgendamientoReturn => {
     !!form.location &&
     !!form.scheduled_date &&
     !!form.scheduled_time &&
+    isFutureDateTime(form.scheduled_date, form.scheduled_time) &&
     isInvitedValid(form.invited);
 
   const submit = async () => {

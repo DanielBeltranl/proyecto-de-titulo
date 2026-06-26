@@ -66,6 +66,8 @@ export const MatchStats = () => {
               effectivenessPct={data.effectivenessPct}
               breakPointsFavorable={data.breakPointsFavorable}
               breakPointsAgainst={data.breakPointsAgainst}
+              matchPointsFavorable={data.matchPointsFavorable}
+              matchPointsAgainst={data.matchPointsAgainst}
             />
           </div>
           <div className={styles.colFull}>

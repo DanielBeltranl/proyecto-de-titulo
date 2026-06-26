@@ -102,7 +102,7 @@
 .timerIcon {
   width: 2.5rem;
   height: 2.5rem;
-  background: rgba(255, 193, 116, 0.1);
+  background: rgba(255, 179, 0, 0.1);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -112,7 +112,7 @@
 
 .timerIcon .material-symbols-outlined {
   font-size: 1.25rem;
-  color: #ffc174;
+  color: #ffb300;
 }
 
 .timerIconBad { background: rgba(255, 180, 171, 0.1); }

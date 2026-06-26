@@ -267,10 +267,6 @@ export const obtenerPartidosAgendados = async () => {
     return await api.get('/matches/schedule/');
 };
 
-export const obtenerPartidosCoachCreados = async () => {
-    return await api.get('/matches/coach/created/');
-};
-
 export const obtenerPartidosCreados = async () => {
     return await api.get('/matches/my-created/');
 };

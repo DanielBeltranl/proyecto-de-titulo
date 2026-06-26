@@ -14,9 +14,11 @@ const LocalPlayerSelector: React.FC<LocalPlayerSelectorProps> = ({ players, load
     <section className={styles.section}>
       <div className={styles.header}>
         <span className="material-symbols-outlined">person</span>
-        <h2 className={styles.title}>Jugador Local</h2>
+        <h2 className={styles.title}>Elige a tu alumno</h2>
         <span className={styles.required}>Requerido</span>
       </div>
+
+      <p className={styles.hint}>Acá se desplegarán todos los alumnos que tienes vinculados.</p>
 
       {loading ? (
         <p className={styles.hint}>Cargando jugadores...</p>

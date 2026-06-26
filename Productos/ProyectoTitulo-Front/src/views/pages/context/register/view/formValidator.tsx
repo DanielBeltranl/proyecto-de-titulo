@@ -19,6 +19,30 @@ const derivarSexo = (imageUrl?: string): string => {
     return 'Masculino';
 };
 
+const coachPlans = [
+  {
+    name: 'Por jugador',
+    price: 5,
+    unit: '/ jugador',
+    description: 'Ideal para empezar. Paga solo por los jugadores que tienes activos.',
+    featured: false,
+  },
+  {
+    name: 'Pro',
+    price: 25,
+    unit: '/ mes',
+    description: 'Hasta 5 jugadores. El balance ideal entre precio y capacidad.',
+    featured: true,
+  },
+  {
+    name: 'Tour',
+    price: 40,
+    unit: '/ mes',
+    description: 'Hasta 10 jugadores. Para entrenadores con equipos completos.',
+    featured: false,
+  },
+];
+
 export const FormValidator = () => {
     const navigate = useNavigate();
     const [selectedProfileImage, setSelectedProfileImage] = useState<string>();
@@ -153,44 +177,54 @@ export const FormValidator = () => {
 
     if (!role) {
         return (
-            <div className={styles.formContainer}>
+            <div className={`${styles.formContainer} ${styles.formContainerWide}`}>
                 <div className={styles.roleSelector}>
                     <div className={styles.roleHeader}>
-                        <h2 className={styles.roleTitle}>¿Qué tipo de usuario eres?</h2>
+                        <h2 className={styles.roleTitle}>Elige tu plan</h2>
                         <p className={styles.roleSubtitle}>
-                            Selecciona tu rol para continuar con el registro
+                            Registrate como entrenador y lleva el rendimiento de tus jugadores al siguiente nivel
                         </p>
                     </div>
 
-                    <div className={styles.roleButtonsGrid}>
-                        <button
-                            className={styles.roleButton}
-                            onClick={() => handleSelectRole("Jugador")}
-                            type="button"
-                        >
-                            <span className={`${styles.roleIcon} material-symbols-outlined`}>
-                                sports_tennis
-                            </span>
-                            <div className={styles.roleButtonText}>
-                                <span className={styles.roleButtonLabel}>Soy Jugador</span>
-                                <span className={styles.roleButtonDescription}>Competidor activo</span>
-                            </div>
-                        </button>
-
-                        <button
-                            className={styles.roleButton}
-                            onClick={() => handleSelectRole("Entrenador")}
-                            type="button"
-                        >
-                            <span className={`${styles.roleIcon} material-symbols-outlined`}>
-                                school
-                            </span>
-                            <div className={styles.roleButtonText}>
-                                <span className={styles.roleButtonLabel}>Soy Entrenador</span>
-                                <span className={styles.roleButtonDescription}>Instructor profesional</span>
-                            </div>
-                        </button>
+                    <div className={styles.plansGrid}>
+                        {coachPlans.map(plan => (
+                            <button
+                                key={plan.name}
+                                type="button"
+                                className={`${styles.planCard} ${plan.featured ? styles.planCardFeatured : ''}`}
+                                onClick={() => navigate('/register/entrenador')}
+                            >
+                                {plan.featured && (
+                                    <span className={styles.planBadge}>Más popular</span>
+                                )}
+                                <span className={styles.planName}>{plan.name}</span>
+                                <div className={styles.planPrice}>
+                                    <strong>${plan.price}</strong>
+                                    <span>{plan.unit}</span>
+                                </div>
+                                <p className={styles.planDescription}>{plan.description}</p>
+                                <div className={styles.planCta}>Registrarse como entrenador</div>
+                            </button>
+                        ))}
                     </div>
+
+                    <div className={styles.playerDivider}>
+                        <span>¿Eres jugador?</span>
+                    </div>
+
+                    <button
+                        type="button"
+                        className={styles.playerButton}
+                        onClick={() => handleSelectRole("Jugador")}
+                    >
+                        <span className="material-symbols-outlined">sports_tennis</span>
+                        <div>
+                            <span className={styles.playerButtonLabel}>Registrarse como jugador</span>
+                            <span className={styles.playerButtonNote}>
+                                Deberás tener un vínculo con un entrenador para acceder a todas las funciones.
+                            </span>
+                        </div>
+                    </button>
                 </div>
             </div>
         );

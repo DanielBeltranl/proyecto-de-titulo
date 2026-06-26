@@ -7,6 +7,8 @@ interface Props {
   effectivenessPct: number;
   breakPointsFavorable: BreakPoints;
   breakPointsAgainst: BreakPoints;
+  matchPointsFavorable: BreakPoints;
+  matchPointsAgainst: BreakPoints;
 }
 
 const CIRCUMFERENCE = 2 * Math.PI * 40;
@@ -20,6 +22,8 @@ export const PointPerformance = ({
   effectivenessPct,
   breakPointsFavorable,
   breakPointsAgainst,
+  matchPointsFavorable,
+  matchPointsAgainst,
 }: Props) => {
   const offset = CIRCUMFERENCE * (1 - effectivenessPct / 100);
 
@@ -85,6 +89,26 @@ export const PointPerformance = ({
                 <span className={styles.bpPctBad}> {favPct(breakPointsAgainst)}%</span>
               </p>
               <p className={styles.bpSub}>Concedidos vs Perdidos</p>
+            </div>
+          </div>
+          <div className={styles.bpCard}>
+            <p className={styles.bpTitle}>Puntos de Partido Generados</p>
+            <div className={styles.bpRow}>
+              <p className={styles.bpFraction}>
+                {matchPointsFavorable.won}/{matchPointsFavorable.total}
+                <span className={styles.bpPctGood}> {favPct(matchPointsFavorable)}%</span>
+              </p>
+              <p className={styles.bpSub}>Convertidos vs Generados</p>
+            </div>
+          </div>
+          <div className={`${styles.bpCard} ${styles.bpCardBad}`}>
+            <p className={styles.bpTitle}>Puntos de Partido En Contra</p>
+            <div className={styles.bpRow}>
+              <p className={styles.bpFraction}>
+                {matchPointsAgainst.won}/{matchPointsAgainst.total}
+                <span className={styles.bpPctBad}> {favPct(matchPointsAgainst)}%</span>
+              </p>
+              <p className={styles.bpSub}>Salvados vs Enfrentados</p>
             </div>
           </div>
         </div>

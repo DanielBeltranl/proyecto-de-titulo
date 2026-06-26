@@ -258,6 +258,11 @@ export const useScoreBoardApi = (uuid: string): UseScoreBoardApiReturn => {
       currentSetId:  state.currentSetId,
       breakPointChance: state.breakPointChance,
       hasUndo: state.hasUndo,
+      gameEnded: state.gameEnded,
+      gameWinner: state.gameWinner,
+      matchEnded: state.matchEnded,
+      matchClosed: state.matchClosed,
+      pendingWinnerId: state.pendingWinnerId,
     };
 
     setState(prev => ({ ...prev, actionLoading: true }));

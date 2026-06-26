@@ -13,7 +13,7 @@ interface ApiRecord {
 interface ApiLastResult {
   match_id: string;
   won: boolean;
-  opponent: { id: number; nombre: string; apellidoPaterno: string };
+  opponent: { id: string | null; nombre: string; apellidoPaterno: string };
   location: string;
   surface: string;
 }
@@ -37,6 +37,7 @@ interface ApiBreakPoints {
 
 interface ApiQuartile {
   quartile: number;
+  color: string;
   min_duration: number;
   max_duration: number;
   count: number;
@@ -48,16 +49,24 @@ export interface ApiInterval {
   points_won_avg: number;
 }
 
+interface ApiDistanceInterval {
+  interval: number;
+  distance_avg: number;
+}
+
 interface ApiResponse {
   message?: string;
   record?: ApiRecord;
   last_result?: ApiLastResult;
+  total_distance?: number;
   points_win_loss?: ApiPointsWinLoss;
   avg_duration_won?: string;
   avg_duration_lost?: string;
   break_points?: ApiBreakPoints;
+  match_points?: ApiBreakPoints;
   quartiles?: ApiQuartile[];
   points_per_interval?: ApiInterval[];
+  distance_per_interval?: ApiDistanceInterval[];
 }
 
 // ── Internal model ─────────────────────────────────────────────────────────
@@ -67,12 +76,15 @@ export interface QuartileStat { pct: number; minSec: number; maxSec: number }
 export interface GlobalStatsData {
   record: ApiRecord;
   lastResult: ApiLastResult | null;
+  totalDistance: number;
   pointsWinLoss: ApiPointsWinLoss;
   avgDurationWon: string;
   avgDurationLost: string;
   breakPoints: ApiBreakPoints;
+  matchPoints: ApiBreakPoints | null;
   quartiles: QuartileStat[];
   pointsPerInterval: ApiInterval[];
+  distancePerInterval: ApiDistanceInterval[];
 }
 
 // ── Fetch ──────────────────────────────────────────────────────────────────
@@ -90,10 +102,12 @@ export const fetchGlobalStats = async (playerId?: number): Promise<GlobalStatsDa
   return {
     record: data.record,
     lastResult: data.last_result ?? null,
+    totalDistance: data.total_distance ?? 0,
     pointsWinLoss: data.points_win_loss!,
     avgDurationWon: data.avg_duration_won ?? '—',
     avgDurationLost: data.avg_duration_lost ?? '—',
     breakPoints: data.break_points!,
+    matchPoints: data.match_points ?? null,
     quartiles: [1, 2, 3, 4].map(n => {
       const q = data.quartiles?.find(q => q.quartile === n);
       return {
@@ -103,5 +117,6 @@ export const fetchGlobalStats = async (playerId?: number): Promise<GlobalStatsDa
       };
     }),
     pointsPerInterval: data.points_per_interval ?? [],
+    distancePerInterval: data.distance_per_interval ?? [],
   };
 };

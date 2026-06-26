@@ -82,3 +82,31 @@
 .bgBottom {
     background-color: #1f1f1f;
 }
+
+/* --- CELULAR LANDSCAPE compacto --- */
+@media (orientation: landscape) and (max-height: 500px) {
+    .gameCell {
+        height: 4rem;
+        width: 3rem;
+        font-size: 1.25rem;
+    }
+
+    .completedColumn .gameCell {
+        font-size: 0.9rem;
+        width: 2.25rem;
+    }
+}
+
+/* --- TABLET LANDSCAPE: intermedio --- */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+    .gameCell {
+        height: 6rem;
+        width: 5rem;
+        font-size: 1.5rem;
+    }
+
+    .completedColumn .gameCell {
+        width: 3.5rem;
+        font-size: 1.1rem;
+    }
+}

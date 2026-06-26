@@ -3,6 +3,7 @@ import styles from './globalBreakPoints.module.css';
 
 interface Props {
   bp: GlobalStatsData['breakPoints'];
+  mp: GlobalStatsData['matchPoints'];
   avgDurationWon: string;
   avgDurationLost: string;
 }
@@ -27,7 +28,7 @@ const BarItem = ({ label, pct, detail, color }: BarItemProps) => (
   </div>
 );
 
-export const GlobalBreakPoints = ({ bp, avgDurationWon, avgDurationLost }: Props) => (
+export const GlobalBreakPoints = ({ bp, mp, avgDurationWon, avgDurationLost }: Props) => (
   <div className={styles.card}>
     <span className="material-symbols-outlined" style={{
       position: 'absolute', top: '1rem', right: '1rem',
@@ -52,6 +53,22 @@ export const GlobalBreakPoints = ({ bp, avgDurationWon, avgDurationLost }: Props
         detail={`${bp.saved} de ${bp.faced} enfrentados`}
         color="green"
       />
+      {mp && (
+        <>
+          <BarItem
+            label="Puntos de Partido Generados"
+            pct={mp.conversion_pct}
+            detail={`${mp.converted} de ${mp.generated} generados`}
+            color="amber"
+          />
+          <BarItem
+            label="Puntos de Partido Salvados"
+            pct={mp.save_pct}
+            detail={`${mp.saved} de ${mp.faced} enfrentados`}
+            color="red"
+          />
+        </>
+      )}
     </div>
 
     <div className={styles.timers}>

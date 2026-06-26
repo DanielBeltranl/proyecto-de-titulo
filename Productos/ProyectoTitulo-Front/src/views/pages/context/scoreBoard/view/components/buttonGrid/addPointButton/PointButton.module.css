@@ -47,3 +47,31 @@
     color: #e2e2e2;
     border: 1px solid rgba(83, 68, 52, 0.2);
 }
+
+/* --- CELULAR LANDSCAPE compacto --- */
+@media (orientation: landscape) and (max-height: 500px) {
+    .button {
+        height: 3rem;
+        border-radius: 0.5rem;
+    }
+
+    .topLabel {
+        font-size: 0.5rem;
+        margin-bottom: 0.1rem;
+    }
+
+    .mainLabel {
+        font-size: 1.1rem;
+    }
+}
+
+/* --- TABLET LANDSCAPE: intermedio --- */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+    .button {
+        height: 4.5rem;
+    }
+
+    .mainLabel {
+        font-size: 1.4rem;
+    }
+}

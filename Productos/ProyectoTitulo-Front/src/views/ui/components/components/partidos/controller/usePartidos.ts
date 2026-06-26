@@ -95,7 +95,7 @@ export const usePartidos = (): UsePartidosReturn => {
     try {
       setAcceptingId(uuid);
       await acceptarInvitacionJugador(uuid);
-      await refreshInvitaciones();
+      await refresh();
     } catch (err: any) {
       const status = err.response?.status;
       if (status === 403) alert('No tenés acceso a este partido.');
@@ -104,7 +104,7 @@ export const usePartidos = (): UsePartidosReturn => {
     } finally {
       setAcceptingId(null);
     }
-  }, [refreshInvitaciones]);
+  }, [refresh]);
 
   return {
     creados,

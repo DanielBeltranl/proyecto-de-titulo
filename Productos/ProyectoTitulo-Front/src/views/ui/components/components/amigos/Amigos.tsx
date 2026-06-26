@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './Amigos.module.css';
 import { UserSearch } from '../userSearch';
 import { useAmigos } from './controller/useAmigos';
 import CoachingRequests from './components/coachingRequests/CoachingRequests';
 import {
-  buscarJugadores,
-  enviarSolicitudAmistad,
   aceptarSolicitudAmistad,
   rechazarSolicitudAmistad,
   obtenerSolicitudesAmistad,
@@ -15,15 +13,6 @@ import {
   obtenerSolicitudesRecibidas,
 } from '../../../../../services/usuarioService';
 import type { SolicitudCoaching } from '../../../../../services/usuarioService';
-
-interface SearchPlayer {
-  player_id: number;
-  correo: string;
-  display_name: string;
-  nivel: string | null;
-  button_state: 'NONE' | 'PENDING' | 'PARTNERS';
-  rol: string;
-}
 
 interface FriendshipRequest {
   id: number;
@@ -47,88 +36,51 @@ interface FriendshipRequest {
 
 const Amigos: React.FC = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { amigos, alumnos, isCoach, loading: loadingFriends, refresh: refreshAmigos } = useAmigos();
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeTab, setActiveTab] = useState<'all' | 'friends' | 'solicitudes'>('all');
-  const [searchResults, setSearchResults] = useState<SearchPlayer[]>([]);
+  const tabParam = searchParams.get('tab');
+  const initialTab = tabParam === 'solicitudes' ? 'solicitudes' : 'friends';
+  const [activeTab, setActiveTab] = useState<'friends' | 'solicitudes'>(initialTab);
   const [solicitudesRecibidas, setSolicitudesRecibidas] = useState<FriendshipRequest[]>([]);
   const [solicitudesEnviadas, setSolicitudesEnviadas] = useState<FriendshipRequest[]>([]);
   const [solicitudesCoaching, setSolicitudesCoaching] = useState<SolicitudCoaching[]>([]);
   const [solicitudesCoachingRecibidas, setSolicitudesCoachingRecibidas] = useState<SolicitudCoaching[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [solicitudEnvio, setSolicitudEnvio] = useState<{ [key: number]: 'loading' | 'success' | 'error' | null }>({});
-  const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
-    const cargarSolicitudes = async () => {
-      try {
-        if (isCoach) {
-          const recibidas = await obtenerSolicitudesRecibidas();
-          setSolicitudesCoachingRecibidas(
-            Array.isArray(recibidas.data)
-              ? recibidas.data.filter(s => s.status === 'PENDIENTE')
-              : []
-          );
-        } else {
-          const [recibidas, enviadas, coaching] = await Promise.all([
-            obtenerSolicitudesAmistad(),
-            obtenerSolicitudesEnviadas(),
-            obtenerSolicitudesCoachingEnviadas(),
-          ]);
-          const recibidasData = Array.isArray(recibidas.data)
-            ? recibidas.data
-            : recibidas.data.solicitudes || [];
-          const enviadasData = Array.isArray(enviadas.data)
-            ? enviadas.data
-            : enviadas.data.solicitudes || [];
-          setSolicitudesRecibidas(recibidasData);
-          setSolicitudesEnviadas(enviadasData);
-          setSolicitudesCoaching(Array.isArray(coaching.data) ? coaching.data : []);
-        }
-      } catch (err) {
-        console.error('Error al cargar solicitudes:', err);
+  const cargarSolicitudes = useCallback(async () => {
+    try {
+      if (isCoach) {
+        const recibidas = await obtenerSolicitudesRecibidas();
+        setSolicitudesCoachingRecibidas(
+          Array.isArray(recibidas.data)
+            ? recibidas.data.filter(s => s.status === 'PENDIENTE')
+            : []
+        );
+      } else {
+        const [recibidas, enviadas, coaching] = await Promise.all([
+          obtenerSolicitudesAmistad(),
+          obtenerSolicitudesEnviadas(),
+          obtenerSolicitudesCoachingEnviadas(),
+        ]);
+        const recibidasData = Array.isArray(recibidas.data)
+          ? recibidas.data
+          : recibidas.data.solicitudes || [];
+        const enviadasData = Array.isArray(enviadas.data)
+          ? enviadas.data
+          : enviadas.data.solicitudes || [];
+        setSolicitudesRecibidas(recibidasData);
+        setSolicitudesEnviadas(enviadasData);
+        setSolicitudesCoaching(Array.isArray(coaching.data) ? coaching.data : []);
       }
-    };
-
-    cargarSolicitudes();
+    } catch (err) {
+      console.error('Error al cargar solicitudes:', err);
+    }
   }, [isCoach]);
 
   useEffect(() => {
-    if (searchTimeoutRef.current) {
-      clearTimeout(searchTimeoutRef.current);
-    }
+    cargarSolicitudes();
+  }, [cargarSolicitudes]);
 
-    if (searchTerm.trim().length === 0) {
-      setSearchResults([]);
-      return;
-    }
-
-    searchTimeoutRef.current = setTimeout(async () => {
-      try {
-        setLoading(true);
-        const response = await buscarJugadores(searchTerm);
-
-        const resultsData = Array.isArray(response.data)
-          ? response.data
-          : response.data.results || [];
-
-        setSearchResults(resultsData);
-        setError(null);
-      } catch (err) {
-        console.error('Error en búsqueda:', err);
-        setSearchResults([]);
-      } finally {
-        setLoading(false);
-      }
-    }, 300);
-
-    return () => {
-      if (searchTimeoutRef.current) {
-        clearTimeout(searchTimeoutRef.current);
-      }
-    };
-  }, [searchTerm]);
 
   const getLevelColor = (level: string): string => {
     switch (level) {
@@ -148,34 +100,6 @@ const Amigos: React.FC = () => {
     return `${nombre} ${apellidoPaterno}`.trim();
   };
 
-  const handleAnadirAmigo = async (playerId: number) => {
-    try {
-      setSolicitudEnvio(prev => ({ ...prev, [playerId]: 'loading' }));
-      await enviarSolicitudAmistad(playerId);
-
-      setSearchResults(searchResults.map(p =>
-        p.player_id === playerId ? { ...p, button_state: 'PENDING' } : p
-      ));
-
-      setSolicitudEnvio(prev => ({ ...prev, [playerId]: 'success' }));
-
-      setTimeout(() => {
-        setSolicitudEnvio(prev => ({ ...prev, [playerId]: null }));
-      }, 2000);
-    } catch (error: any) {
-      console.error('Error al enviar solicitud:', error);
-      setSolicitudEnvio(prev => ({ ...prev, [playerId]: 'error' }));
-
-      const errorMsg = error.response?.data?.friend_id?.[0] ||
-                       error.response?.data?.error ||
-                       'Error al enviar solicitud de amistad';
-      alert(errorMsg);
-
-      setTimeout(() => {
-        setSolicitudEnvio(prev => ({ ...prev, [playerId]: null }));
-      }, 3000);
-    }
-  };
 
   const handleAceptarSolicitud = async (solicitudId: number) => {
     try {
@@ -198,52 +122,19 @@ const Amigos: React.FC = () => {
     }
   };
 
-  const renderPlayerButton = (player: SearchPlayer) => {
-    const isLoading = solicitudEnvio[player.player_id] === 'loading';
-
-    switch (player.button_state) {
-      case 'NONE':
-        return (
-          <button
-            className={styles.buttonAdd}
-            onClick={() => handleAnadirAmigo(player.player_id)}
-            disabled={isLoading}
-          >
-            <span className="material-symbols-outlined">
-              {isLoading ? 'hourglass_empty' : 'person_add'}
-            </span>
-            <span>{isLoading ? 'Enviando...' : 'Añadir como amigo'}</span>
-          </button>
-        );
-      case 'PENDING':
-        return (
-          <div className={styles.buttonPendingSent}>
-            <span className="material-symbols-outlined">check_circle</span>
-            <span>Solicitud enviada</span>
-          </div>
-        );
-      case 'PARTNERS':
-        return (
-          <div className={styles.buttonFriend}>
-            <span className="material-symbols-outlined" style={{ fontVariationSettings: '"FILL" 1' }}>
-              check_circle
-            </span>
-            <span>Amigo</span>
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
 
   const filteredAmigos = amigos.filter(amistad => {
     const matchesSearch =
       amistad.friend.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
       amistad.friend.apellidoPaterno.toLowerCase().includes(searchTerm.toLowerCase()) ||
       amistad.friend.correo.toLowerCase().includes(searchTerm.toLowerCase());
-
     return matchesSearch;
   });
+
+  const filteredAlumnos = alumnos.filter(alumno =>
+    alumno.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    alumno.apellidoPaterno.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <main className={styles.mainContainer}>
@@ -256,12 +147,6 @@ const Amigos: React.FC = () => {
 
           <div className={styles.tabsContainer}>
             <button
-              className={`${styles.tab} ${activeTab === 'all' ? styles.tabActive : ''}`}
-              onClick={() => { setActiveTab('all'); setSearchTerm(''); }}
-            >
-              Buscar
-            </button>
-            <button
               className={`${styles.tab} ${activeTab === 'friends' ? styles.tabActive : ''}`}
               onClick={() => { setActiveTab('friends'); setSearchTerm(''); }}
             >
@@ -269,7 +154,7 @@ const Amigos: React.FC = () => {
             </button>
             <button
               className={`${styles.tab} ${activeTab === 'solicitudes' ? styles.tabActive : ''}`}
-              onClick={() => { setActiveTab('solicitudes'); setSearchTerm(''); }}
+              onClick={() => { setActiveTab('solicitudes'); setSearchTerm(''); cargarSolicitudes(); }}
             >
               Solicitudes
               {(isCoach ? solicitudesCoachingRecibidas.length : solicitudesRecibidas.length) > 0 && (
@@ -282,11 +167,11 @@ const Amigos: React.FC = () => {
         </div>
 
         <section className={styles.searchSection}>
-          {(activeTab === 'all' || activeTab === 'friends') && (
+          {activeTab === 'friends' && (
             <UserSearch
               searchTerm={searchTerm}
               onSearchChange={setSearchTerm}
-              placeholder={activeTab === 'all' ? "Nombre de usuario o correo" : "Buscar en mis amigos"}
+              placeholder={activeTab === 'all' ? "Nombre de usuario o correo" : isCoach ? "Filtrar por nombre" : "Buscar en mis amigos"}
             />
           )}
 
@@ -426,9 +311,12 @@ const Amigos: React.FC = () => {
               <>
                 {loadingFriends && <div className={styles.loadingMessage}>Cargando alumnos...</div>}
                 {!loadingFriends && alumnos.length === 0 && (
-                  <div className={styles.emptyMessage}>No tenés alumnos asociados aún</div>
+                  <div className={styles.emptyMessage}>No tienes alumnos asociados aún</div>
                 )}
-                {alumnos.map((alumno) => (
+                {!loadingFriends && alumnos.length > 0 && filteredAlumnos.length === 0 && (
+                  <div className={styles.emptyMessage}>No se encontraron alumnos con ese nombre</div>
+                )}
+                {filteredAlumnos.map((alumno) => (
                   <div
                     key={alumno.id}
                     className={`${styles.playerCard} ${styles.playerCardFriend}`}
@@ -452,6 +340,10 @@ const Amigos: React.FC = () => {
                         )}
                       </div>
                     </div>
+                    <span className={styles.statsLabel}>
+                      <span className="material-symbols-outlined">bar_chart</span>
+                      Ver estadísticas globales
+                    </span>
                   </div>
                 ))}
               </>
@@ -483,48 +375,7 @@ const Amigos: React.FC = () => {
                   </div>
                 ))}
               </>
-            ) : (
-              <>
-                {loading && (
-                  <div className={styles.loadingMessage}>Buscando jugadores...</div>
-                )}
-                {error && (
-                  <div className={styles.errorMessage}>{error}</div>
-                )}
-                {!loading && searchTerm.length === 0 && (
-                  <div className={styles.emptyMessage}>
-                    Escribe un nombre o correo para buscar jugadores
-                  </div>
-                )}
-                {!loading && searchTerm.length > 0 && searchResults.length === 0 && (
-                  <div className={styles.emptyMessage}>No se encontraron jugadores</div>
-                )}
-                {searchResults.filter(p => p.rol !== 'Entrenador').map((player) => (
-                  <div
-                    key={player.player_id}
-                    className={`${styles.playerCard} ${
-                      player.button_state === 'PARTNERS' ? styles.playerCardFriend : styles.playerCardActive
-                    }`}
-                  >
-                    <div className={styles.playerMain}>
-                      <div className={styles.avatarContainer}>
-                        <div className={styles.avatarPlaceholder}>
-                          <span className="material-symbols-outlined">person</span>
-                        </div>
-                      </div>
-                      <div className={styles.playerInfo}>
-                        <span className={`${styles.levelBadge} ${getLevelColor(player.nivel ?? '')}`}>
-                          {player.nivel}
-                        </span>
-                        <h3 className={styles.playerName}>{player.display_name}</h3>
-                      </div>
-                    </div>
-
-                    {renderPlayerButton(player)}
-                  </div>
-                ))}
-              </>
-            )}
+            ) : null}
           </div>
         </section>
       </div>

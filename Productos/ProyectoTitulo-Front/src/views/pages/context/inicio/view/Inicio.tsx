@@ -2,26 +2,32 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../../../context/AuthContext';
 import VistaJugador from '../../../../ui/components/pages/VistaJugador/VistaJugador';
 import VistaEntrenador from '../../../../ui/components/pages/VistaEntrenador/VistaEntrenador';
+import HeroCarousel from './components/HeroCarousel/HeroCarousel';
+import img0 from '../../../../../assets/photos/img.png';
+import img1 from '../../../../../assets/photos/img_1.png';
+import img2 from '../../../../../assets/photos/img_2.png';
 import styles from './Inicio.module.css';
+
+const heroImages = [img0, img1, img2];
 
 const pillars = [
   {
-    icon: 'scoreboard',
-    title: 'Marcador en Vivo',
+    icon: 'edit_note',
+    title: 'Registro Inteligente',
     description:
-      'Sincronización instantánea en la nube para sesiones de entrenamiento y torneos de alta intensidad.',
+      'Registra tus datos de manera sencilla y obtén un análisis detallado de forma instantánea.',
   },
   {
-    icon: 'monitoring',
-    title: 'Análisis Táctico',
+    icon: 'group',
+    title: 'Información Centralizada',
     description:
-      'Métricas biomecánicas y patrones de movimiento transformados en ventajas competitivas reales.',
+      'Olvida múltiples hojas de cálculo y centraliza la información de todos tus alumnos.',
   },
   {
-    icon: 'groups',
-    title: 'Comunidad',
+    icon: 'biotech',
+    title: 'Automatización basada en la ciencia',
     description:
-      'Conexión global con profesionales, entrenadores y entusiastas para compartir conocimientos y experiencias de élite.',
+      'Cálculos basados en documentación científica para darte resultados precisos sin el trabajo manual.',
   },
 ];
 
@@ -41,10 +47,6 @@ function PillarCard({
       </div>
       <h3>{title}</h3>
       <p>{description}</p>
-      <a href="/" className={styles.pillarLink}>
-        Explorar
-        <span className="material-symbols-outlined">arrow_forward</span>
-      </a>
     </article>
   );
 }
@@ -71,8 +73,7 @@ export default function Inicio() {
           </h1>
 
           <p>
-            Control total sobre el rendimiento técnico y estratégico. Dominio
-            absoluto basado en datos de alta precisión.
+            Pensada por y para entrenadores. Lleva a tus alumnos al siguiente nivel.
           </p>
 
           <div className={styles.heroActions}>
@@ -86,25 +87,7 @@ export default function Inicio() {
         </div>
 
         <div className={styles.heroVisual}>
-          <div className={styles.heroCard}>
-            <img
-              alt="Elite Analytics"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhqCnJbOPkG709_mGc5UgvnG0LnSPmYFSwIAZ1Utbmf_KBNDbEoxVX87bSh7kUfBVEzES9yc5EjN7Xq4XQOI11mSbp-1RufdU5Q5poDlzpQyVic_sk13wgtbygok03DaAO-JuFhcSqSQU1kRNL7KYUw3Q-R2aF-pVeRIVhsPFZ776ZKtJXEpdHyL2eFcKBZ2Gb6lkd31GgZlNc265ZqeJpLEv7uQzyciVFXQrvryRuTBOJ9dOGE1AcZt05UW5BY6ZDMlKJFLwK8os"
-            />
-            <div className={styles.heroOverlay} />
-            <div className={styles.liveTag}>En Vivo</div>
-
-            <div className={styles.heroStats}>
-              <div>
-                <p>Análisis de Sesión</p>
-                <strong>Performance v4.2</strong>
-              </div>
-              <div className={styles.precisionBox}>
-                <strong>98.4%</strong>
-                <span>Precisión</span>
-              </div>
-            </div>
-          </div>
+          <HeroCarousel images={heroImages} />
         </div>
       </section>
 

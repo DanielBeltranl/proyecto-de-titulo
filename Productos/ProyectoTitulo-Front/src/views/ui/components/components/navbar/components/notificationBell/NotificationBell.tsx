@@ -158,7 +158,7 @@ export function NotificationBell({ isAuthenticated }: NotificationBellProps) {
   if (!isAuthenticated) return null;
 
   function resolveRoute(tipo: string): string | null {
-    if (tipo === 'solicitud_entrenador' || tipo === 'solicitud_aceptada') return '/solicitudes';
+    if (tipo === 'solicitud_entrenador' || tipo === 'solicitud_aceptada') return '/contactos?tab=solicitudes';
     if (tipo === 'solicitud_rechazada') return null;
     if (tipo.startsWith('partido_')) return '/partidos';
     return null;

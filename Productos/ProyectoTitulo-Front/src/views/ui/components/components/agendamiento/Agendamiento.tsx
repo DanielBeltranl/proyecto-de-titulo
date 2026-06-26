@@ -38,7 +38,7 @@ const Agendamiento: React.FC = () => {
               setField('scheduled_time', data.scheduled_time);
             }}
           />
-          <InvitedPlayerSearch onChange={setInvited} />
+          <InvitedPlayerSearch onChange={setInvited} excludeId={form.id_local_player} />
         </div>
 
         <footer className={styles.footer}>

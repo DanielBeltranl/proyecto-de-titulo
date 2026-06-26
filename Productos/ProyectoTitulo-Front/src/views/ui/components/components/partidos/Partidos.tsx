@@ -137,6 +137,8 @@ const Partidos: React.FC = () => {
                 ? getCoachRivalLabel(match, coachTab)
                 : getPlayerRivalLabel(match, playerTab);
 
+              const rivalRoleLabel = isEntrenador ? 'Alumno' : 'Rival';
+
               const showAccept = isEntrenador
                 && coachTab === 'invitaciones'
                 && match.match_state === 'PENDIENTE';
@@ -166,6 +168,7 @@ const Partidos: React.FC = () => {
                   key={match.id_match}
                   match={match}
                   rivalLabel={rivalLabel}
+                  rivalRoleLabel={rivalRoleLabel}
                   onClick={cardOnClick}
                   onAccept={showAccept ? () => acceptInvitation(match.id_match) : undefined}
                   showStartCta={showStartCta}

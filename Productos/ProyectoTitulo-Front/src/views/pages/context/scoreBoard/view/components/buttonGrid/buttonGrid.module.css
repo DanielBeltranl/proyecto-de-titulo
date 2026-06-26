@@ -28,3 +28,22 @@
     opacity: 0.3;
     cursor: not-allowed;
 }
+
+/* --- CELULAR LANDSCAPE compacto --- */
+@media (orientation: landscape) and (max-height: 500px) {
+    .buttonsContainer {
+        gap: 0.5rem;
+    }
+
+    .undoButton {
+        padding: 0 0.75rem;
+        font-size: 0.65rem;
+    }
+}
+
+/* --- TABLET LANDSCAPE: intermedio --- */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+    .buttonsContainer {
+        gap: 0.75rem;
+    }
+}

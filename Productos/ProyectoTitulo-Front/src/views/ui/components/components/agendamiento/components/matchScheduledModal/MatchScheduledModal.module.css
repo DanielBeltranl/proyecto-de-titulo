@@ -13,7 +13,7 @@
 .card {
   background: #1f1f1f;
   border: 1px solid rgba(255, 193, 116, 0.25);
-  border-radius: 1rem;
+  border-radius: 0;
   padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;
@@ -58,7 +58,7 @@
   background: #ffc174;
   color: #131313;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0;
   font-size: 0.875rem;
   font-weight: 800;
   font-family: inherit;

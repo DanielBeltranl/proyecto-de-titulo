@@ -1,20 +1,21 @@
+import { useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { type UserInfo, userInfoSchema } from "../model/userDataValidator.ts";
 import styles from "./formValidator.module.css";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 
-// Componentes personalizados
 import { CustomInput } from "../components/customInput/customInput.tsx";
 import { SubmitButtonComponent } from "../components/submitButtomComponent/submitButtomComponent.tsx";
-
-// Servicio de conexión con Django
+import { SuccessModal } from "../components/successModal/SuccessModal.tsx";
 import { registrarUsuario } from "../../../../../services/usuarioService.js";
 
 export const FormEntrenador = () => {
     const navigate = useNavigate();
+    const [apiError, setApiError] = useState<string | null>(null);
+    const [showSuccess, setShowSuccess] = useState(false);
 
-    const { control, handleSubmit, formState: { errors, isSubmitting } } = useForm<UserInfo>({
+    const { control, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<UserInfo>({
         resolver: zodResolver(userInfoSchema) as any,
         defaultValues: {
             nombre: "",
@@ -25,94 +26,97 @@ export const FormEntrenador = () => {
             confirmPassword: "",
             role: "Entrenador",
             fecha_nacimiento: "",
-            profileImage: ""
-        }
+            profileImage: "",
+        },
     });
 
     const onSubmit: SubmitHandler<UserInfo> = async (data) => {
+        setApiError(null);
         try {
-            // Preparar datos para Django - Entrenador
-            const dataParaDjango = {
+            const payload = {
                 nombre: data.nombre,
                 apellidoPaterno: data.apellidoP,
                 apellidoMaterno: data.apellidoM,
                 correo: data.correo,
                 password: data.password,
                 rol: "Entrenador",
-                fecha_nacimiento: data.fecha_nacimiento
-                // NO enviar: sexo, altura, peso
+                fecha_nacimiento: data.fecha_nacimiento,
             };
 
-            const response = await registrarUsuario(dataParaDjango);            
+            const response = await registrarUsuario(payload);
             console.log("Entrenador creado:", response.data);
-            
-            alert("¡Registro exitoso! Ahora puedes iniciar sesión.");
-            navigate("/login");
-
+            setShowSuccess(true);
         } catch (error: any) {
             const errorData = error.response?.data;
-            console.error("Error en registro de Entrenador:", errorData);
-            
-            // Manejo de errores específicos por campo
+            console.error("Error en registro de entrenador:", errorData);
+
             if (errorData?.correo) {
-                alert("Ese correo ya está registrado.");
+                setError("correo", {
+                    message: Array.isArray(errorData.correo) ? errorData.correo[0] : errorData.correo,
+                });
             } else if (errorData?.fecha_nacimiento) {
-                alert("Fecha de nacimiento inválida.");
-            } else if (errorData?.rol) {
-                alert("Rol inválido. Por favor, intenta nuevamente.");
+                setError("fecha_nacimiento", { message: "Fecha de nacimiento inválida." });
             } else {
-                alert("Hubo un error en el registro. Revisa los datos e intenta nuevamente.");
+                setApiError("Hubo un error en el registro. Revisá los datos e intentá nuevamente.");
             }
         }
     };
 
     return (
+        <>
+        <SuccessModal open={showSuccess} />
         <div className={styles.formContainer}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
-                    <h2 style={{ color: '#ffc174', fontSize: '1.5rem', marginBottom: '0.5rem', textTransform: 'uppercase' }}>
-                        Registro de Entrenador
-                    </h2>
-                    <p style={{ color: '#a08e7a', fontSize: '0.875rem' }}>
-                        Completa tus datos para comenzar a entrenar con TennisApp
-                    </p>
+            <div className={styles.formHeader}>
+                <span className={styles.formHeaderBadge}>
+                    <span className="material-symbols-outlined">school</span>
+                    Entrenador
+                </span>
+                <h2 className={styles.formTitle}>Crea tu cuenta</h2>
+                <p className={styles.formSubtitle}>
+                    Completa tus datos para empezar a gestionar el rendimiento de tus jugadores en Double Fault.
+                </p>
+            </div>
+
+            {apiError && (
+                <div className={styles.errorBanner}>
+                    <span className="material-symbols-outlined">error</span>
+                    {apiError}
                 </div>
-                
+            )}
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <p className={styles.formSectionLabel}>Datos personales</p>
                 <div className={styles.formGrid}>
                     <CustomInput name="nombre" control={control} label="Nombre" placeholder="Nombre" type="string" error={errors.nombre} />
                     <CustomInput name="apellidoP" control={control} label="Apellido paterno" placeholder="Apellido paterno" type="string" error={errors.apellidoP} />
                 </div>
-
                 <div className={styles.formGrid}>
-                    <CustomInput name="apellidoM" control={control} label="Apellido Materno" placeholder="Apellido materno" type="string" error={errors.apellidoM} />
-                    <CustomInput name="correo" control={control} label="Correo" placeholder="Correo" type="email" error={errors.correo} />
-                </div>
-
-                <div className={styles.formGrid}>
-                    <CustomInput name="password" control={control} label="Contraseña" placeholder="Contraseña" type="password" error={errors.password} />
-                    <CustomInput name="confirmPassword" control={control} label="Repita su contraseña" placeholder="Repita su contraseña" type="password" error={errors.confirmPassword} />
-                </div>
-
-                <div className={styles.formGrid}>
+                    <CustomInput name="apellidoM" control={control} label="Apellido materno" placeholder="Apellido materno" type="string" error={errors.apellidoM} />
                     <CustomInput name="fecha_nacimiento" control={control} label="Fecha de nacimiento" placeholder="YYYY-MM-DD" type="date" error={errors.fecha_nacimiento} />
                 </div>
 
+                <p className={styles.formSectionLabel}>Acceso</p>
+                <div className={styles.formGrid}>
+                    <CustomInput name="correo" control={control} label="Correo" placeholder="correo@ejemplo.com" type="email" error={errors.correo} />
+                </div>
+                <div className={styles.formGrid}>
+                    <CustomInput name="password" control={control} label="Contraseña" placeholder="Contraseña" type="password" error={errors.password} />
+                    <CustomInput name="confirmPassword" control={control} label="Repetir contraseña" placeholder="Repetir contraseña" type="password" error={errors.confirmPassword} />
+                </div>
+
                 <div className={styles.backButtonWrapper}>
-                    <button
-                        type="button"
-                        className={styles.backButton}
-                        onClick={() => window.history.back()}
-                    >
+                    <button type="button" className={styles.backButton} onClick={() => window.history.back()}>
                         ← Atrás
                     </button>
                     <div className={styles.submitWrapper}>
-                        <SubmitButtonComponent 
-                            text={isSubmitting ? "Registrando..." : "Registrarse como Entrenador"} 
-                            onClick={handleSubmit(onSubmit)} 
+                        <SubmitButtonComponent
+                            text={isSubmitting ? "Registrando..." : "Crear cuenta"}
+                            onClick={handleSubmit(onSubmit)}
                         />
                     </div>
                 </div>
             </form>
         </div>
+        </>
     );
 };

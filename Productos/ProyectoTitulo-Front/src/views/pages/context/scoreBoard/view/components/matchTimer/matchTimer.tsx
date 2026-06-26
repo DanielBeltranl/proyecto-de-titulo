@@ -11,6 +11,7 @@ const toMMSS = (seconds: number): string => {
 
 interface MatchTimerProps {
     sessionId?: string;
+    uuid: string;
     gameId: string;
     setId: string;
     matchEnded?: boolean;
@@ -18,6 +19,7 @@ interface MatchTimerProps {
 
 export const MatchTimer = ({
     sessionId = "DT-8829",
+    uuid,
     gameId,
     setId,
     matchEnded = false,
@@ -25,7 +27,7 @@ export const MatchTimer = ({
     const { status } = useMatchStatus();
     const isRunning = status === 'started' && !matchEnded;
 
-    const { elapsed: matchElapsed } = useTimer(true, isRunning);
+    const { elapsed: matchElapsed } = useTimer(true, isRunning, `match-timer-${uuid}`);
     const { elapsed: setElapsed, reset: resetSet } = useTimer(true, isRunning);
     const { elapsed: gameElapsed, reset: resetGame } = useTimer(true, isRunning);
 
