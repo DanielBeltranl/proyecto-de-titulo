@@ -6,6 +6,17 @@ Actualmente, el proyecto se encuentra en fase de **Refactorización de Arquitect
 
 ---
 
+## ▶️ Inicio Rápido
+
+```bash
+npm install
+npm run dev
+```
+
+La app estará disponible en `http://localhost:5173`.
+
+---
+
 ## 🏗️ Arquitectura del Proyecto
 
 Hemos adoptado el patrón **MVC (Modelo-Vista-Controlador)** adaptado a ecosistemas modernos de React, priorizando la separación de responsabilidades:

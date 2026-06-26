@@ -16,13 +16,14 @@ dist-ssr
 .env
 .env.local
 .env.*.local
-.skills-lock.json
+skills-lock.json
 CLAUDE.md
 GUIA_VERIFICACION_CAMBIOS.md
 
 # Claude Code
-.claude/settings.local.json
+.claude/
 .atl/
+.agents/
 
 # Editor directories and files
 .vscode/*

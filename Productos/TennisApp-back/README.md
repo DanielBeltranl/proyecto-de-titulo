@@ -4,6 +4,19 @@ API REST para la aplicación TennisApp desarrollada con Django y Django REST Fra
 
 ---
 
+## ▶️ Inicio Rápido
+
+Asegúrate de tener Docker y Docker Compose instalados, luego:
+
+```bash
+cp .env.example .env   # configurar variables de entorno
+docker-compose up
+```
+
+La API estará disponible en `http://localhost:8000`.
+
+---
+
 ## 📋 Tabla de Contenidos
 
 - [Tecnologías Utilizadas](#-tecnologías-utilizadas)

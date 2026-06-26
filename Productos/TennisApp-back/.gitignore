@@ -2,8 +2,9 @@
 .env
 __pycache__/
 *.pyc
-.claude
+.claude/
 .idea
-.atl
-.agents
+.atl/
+.agents/
 CLAUDE.md
+skills-lock.json
