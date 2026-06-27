@@ -1,0 +1,244 @@
+name: TennisApp Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      job:
+        description: "restart-lab: reopen AWS lab session | deploy: force deploy without push"
+        required: true
+        default: restart-lab
+        type: choice
+        options:
+          - restart-lab
+          - deploy
+
+# ──────────────────────────────────────────────
+# PUSH TO MAIN → build + push ECR + deploy EC2
+# ──────────────────────────────────────────────
+jobs:
+  deploy:
+    name: Build & Deploy
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.job == 'deploy')
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Get EC2-Back private IP
+        id: back-ip
+        run: |
+          IP=$(aws ec2 describe-instances \
+            --instance-ids ${{ vars.BACK_INSTANCE_ID }} \
+            --query "Reservations[0].Instances[0].PrivateIpAddress" \
+            --output text)
+          echo "value=$IP" >> $GITHUB_OUTPUT
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build & push frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: Productos/ProyectoTitulo-Front
+          push: true
+          tags: ${{ vars.ECR_REGISTRY }}/tennisapp-front:latest
+          cache-from: type=gha,scope=front
+          cache-to: type=gha,scope=front,mode=max
+
+      - name: Build & push backend
+        uses: docker/build-push-action@v6
+        with:
+          context: Productos/TennisApp-back
+          push: true
+          tags: ${{ vars.ECR_REGISTRY }}/tennisapp-back:latest
+          cache-from: type=gha,scope=back
+          cache-to: type=gha,scope=back,mode=max
+
+      - name: Deploy backend via SSM
+        run: |
+          SCRIPT=$(cat << 'EOF'
+          #!/bin/bash
+          set -e
+          aws ecr get-login-password --region us-east-1 | \
+            docker login --username AWS --password-stdin ECR_PLACEHOLDER
+          /usr/local/bin/docker-compose -f /opt/tennisapp/docker-compose.yml pull web
+          /usr/local/bin/docker-compose -f /opt/tennisapp/docker-compose.yml up -d --no-deps web
+          echo "Backend updated OK"
+          EOF
+          )
+          SCRIPT="${SCRIPT//ECR_PLACEHOLDER/${{ vars.ECR_REGISTRY }}}"
+          B64=$(printf '%s' "$SCRIPT" | base64 -w 0)
+
+          CMD=$(aws ssm send-command \
+            --instance-ids ${{ vars.BACK_INSTANCE_ID }} \
+            --document-name "AWS-RunShellScript" \
+            --parameters "commands=[\"echo $B64 | base64 -d | bash\"]" \
+            --query "Command.CommandId" --output text)
+
+          echo "SSM backend cmd: $CMD"
+          for i in $(seq 1 24); do
+            STATUS=$(aws ssm get-command-invocation \
+              --command-id "$CMD" --instance-id ${{ vars.BACK_INSTANCE_ID }} \
+              --query "Status" --output text 2>/dev/null || echo "Pending")
+            echo "[$i] $STATUS"
+            [[ "$STATUS" == "Success" || "$STATUS" == "Failed" ]] && break
+            sleep 5
+          done
+          aws ssm get-command-invocation \
+            --command-id "$CMD" --instance-id ${{ vars.BACK_INSTANCE_ID }} \
+            --query "{Status:Status,Output:StandardOutputContent}" --output table
+
+      - name: Deploy frontend via SSM
+        run: |
+          BACK_IP="${{ steps.back-ip.outputs.value }}"
+          FRONT_IMAGE="${{ vars.ECR_REGISTRY }}/tennisapp-front:latest"
+          SCRIPT=$(cat << EOF
+          #!/bin/bash
+          set -e
+          aws ecr get-login-password --region us-east-1 | \
+            docker login --username AWS --password-stdin ${{ vars.ECR_REGISTRY }}
+          docker pull $FRONT_IMAGE
+          docker rm -f tennisapp-front || true
+          docker run -d --name tennisapp-front --restart unless-stopped \
+            -p 80:80 -e BACKEND_HOST=$BACK_IP $FRONT_IMAGE
+          echo "Frontend updated OK"
+          EOF
+          )
+          B64=$(printf '%s' "$SCRIPT" | base64 -w 0)
+
+          CMD=$(aws ssm send-command \
+            --instance-ids ${{ vars.FRONT_INSTANCE_ID }} \
+            --document-name "AWS-RunShellScript" \
+            --parameters "commands=[\"echo $B64 | base64 -d | bash\"]" \
+            --query "Command.CommandId" --output text)
+
+          echo "SSM frontend cmd: $CMD"
+          for i in $(seq 1 24); do
+            STATUS=$(aws ssm get-command-invocation \
+              --command-id "$CMD" --instance-id ${{ vars.FRONT_INSTANCE_ID }} \
+              --query "Status" --output text 2>/dev/null || echo "Pending")
+            echo "[$i] $STATUS"
+            [[ "$STATUS" == "Success" || "$STATUS" == "Failed" ]] && break
+            sleep 5
+          done
+          aws ssm get-command-invocation \
+            --command-id "$CMD" --instance-id ${{ vars.FRONT_INSTANCE_ID }} \
+            --query "{Status:Status,Output:StandardOutputContent}" --output table
+
+      - name: App URL
+        run: |
+          PUBLIC_IP=$(aws ec2 describe-instances \
+            --instance-ids ${{ vars.FRONT_INSTANCE_ID }} \
+            --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
+          echo "App disponible en: http://$PUBLIC_IP"
+
+  # ──────────────────────────────────────────────
+  # RESTART LAB → start EC2s + sync IPs
+  # ──────────────────────────────────────────────
+  restart-lab:
+    name: Restart AWS Lab
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.job == 'restart-lab'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Start instances
+        run: |
+          aws ec2 start-instances \
+            --instance-ids ${{ vars.BACK_INSTANCE_ID }} ${{ vars.FRONT_INSTANCE_ID }}
+          echo "Iniciando instancias..."
+
+      - name: Wait for instances running
+        run: |
+          aws ec2 wait instance-running \
+            --instance-ids ${{ vars.BACK_INSTANCE_ID }} ${{ vars.FRONT_INSTANCE_ID }}
+          echo "Instancias running"
+
+      - name: Wait for SSM agents online
+        run: |
+          for ID in ${{ vars.BACK_INSTANCE_ID }} ${{ vars.FRONT_INSTANCE_ID }}; do
+            echo "Esperando SSM en $ID..."
+            for i in $(seq 1 30); do
+              STATUS=$(aws ssm describe-instance-information \
+                --filters "Key=InstanceIds,Values=$ID" \
+                --query "InstanceInformationList[0].PingStatus" \
+                --output text 2>/dev/null || echo "None")
+              echo "  [$i] $STATUS"
+              [ "$STATUS" = "Online" ] && break
+              sleep 10
+            done
+          done
+
+      - name: Get new IPs
+        id: ips
+        run: |
+          BACK_PRIVATE=$(aws ec2 describe-instances \
+            --instance-ids ${{ vars.BACK_INSTANCE_ID }} \
+            --query "Reservations[0].Instances[0].PrivateIpAddress" --output text)
+          FRONT_PUBLIC=$(aws ec2 describe-instances \
+            --instance-ids ${{ vars.FRONT_INSTANCE_ID }} \
+            --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
+
+          echo "back_private=$BACK_PRIVATE" >> $GITHUB_OUTPUT
+          echo "front_public=$FRONT_PUBLIC" >> $GITHUB_OUTPUT
+          echo "EC2-Back private IP: $BACK_PRIVATE"
+          echo "EC2-Front public IP: $FRONT_PUBLIC"
+
+      - name: Restart frontend with new backend IP
+        run: |
+          BACK_IP="${{ steps.ips.outputs.back_private }}"
+          FRONT_IMAGE="${{ vars.ECR_REGISTRY }}/tennisapp-front:latest"
+          SCRIPT=$(cat << EOF
+          #!/bin/bash
+          set -e
+          docker rm -f tennisapp-front || true
+          docker run -d --name tennisapp-front --restart unless-stopped \
+            -p 80:80 -e BACKEND_HOST=$BACK_IP $FRONT_IMAGE
+          echo "Frontend relanzado con BACKEND_HOST=$BACK_IP"
+          EOF
+          )
+          B64=$(printf '%s' "$SCRIPT" | base64 -w 0)
+
+          CMD=$(aws ssm send-command \
+            --instance-ids ${{ vars.FRONT_INSTANCE_ID }} \
+            --document-name "AWS-RunShellScript" \
+            --parameters "commands=[\"echo $B64 | base64 -d | bash\"]" \
+            --query "Command.CommandId" --output text)
+
+          echo "SSM cmd: $CMD"
+          for i in $(seq 1 24); do
+            STATUS=$(aws ssm get-command-invocation \
+              --command-id "$CMD" --instance-id ${{ vars.FRONT_INSTANCE_ID }} \
+              --query "Status" --output text 2>/dev/null || echo "Pending")
+            echo "[$i] $STATUS"
+            [[ "$STATUS" == "Success" || "$STATUS" == "Failed" ]] && break
+            sleep 5
+          done
+          aws ssm get-command-invocation \
+            --command-id "$CMD" --instance-id ${{ vars.FRONT_INSTANCE_ID }} \
+            --query "{Status:Status,Output:StandardOutputContent}" --output table
+
+      - name: Lab listo
+        run: |
+          echo "Lab restaurado."
+          echo "App en: http://${{ steps.ips.outputs.front_public }}"
