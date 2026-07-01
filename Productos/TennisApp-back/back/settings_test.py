@@ -1,7 +1,7 @@
 """
 Test settings — isolated environment for the user-management / auth / JWT suite.
 
-Rationale: the production settings target PostgreSQL (Neon) and Redis. Unit tests
+Rationale: the production settings target PostgreSQL (self-hosted, Docker on EC2) and Redis. Unit tests
 must not depend on external infrastructure, so this module:
   - swaps the database for an in-memory SQLite engine,
   - trims INSTALLED_APPS to only what the auth module needs (this also avoids the

@@ -23,7 +23,7 @@
         <mxCell id="8-5xsOOrjlFsFQmB8Y6q-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Docker" vertex="1">
           <mxGeometry height="30" width="60" x="660" y="508" as="geometry" />
         </mxCell>
-        <mxCell id="8-5xsOOrjlFsFQmB8Y6q-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Render cloud" vertex="1">
+        <mxCell id="8-5xsOOrjlFsFQmB8Y6q-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="AWS EC2" vertex="1">
           <mxGeometry height="30" width="130" x="620" y="468" as="geometry" />
         </mxCell>
         <mxCell id="8-5xsOOrjlFsFQmB8Y6q-8" parent="1" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" value="&amp;lt;Component&amp;gt;&lt;br&gt;&lt;div&gt;&lt;br&gt;React app&lt;/div&gt;" vertex="1">
@@ -32,13 +32,13 @@
         <mxCell id="8-5xsOOrjlFsFQmB8Y6q-9" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Docker" vertex="1">
           <mxGeometry height="30" width="60" x="-220" y="498" as="geometry" />
         </mxCell>
-        <mxCell id="8-5xsOOrjlFsFQmB8Y6q-10" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Render cloud" vertex="1">
+        <mxCell id="8-5xsOOrjlFsFQmB8Y6q-10" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="AWS EC2" vertex="1">
           <mxGeometry height="30" width="130" x="-240" y="458" as="geometry" />
         </mxCell>
         <mxCell id="8-5xsOOrjlFsFQmB8Y6q-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
           <mxGeometry height="125" width="320" x="655" y="932.5" as="geometry" />
         </mxCell>
-        <mxCell id="8-5xsOOrjlFsFQmB8Y6q-12" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="NeonDB" vertex="1">
+        <mxCell id="8-5xsOOrjlFsFQmB8Y6q-12" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Docker (EC2)" vertex="1">
           <mxGeometry height="30" width="60" x="670" y="940.5" as="geometry" />
         </mxCell>
         <mxCell id="8-5xsOOrjlFsFQmB8Y6q-41" edge="1" parent="1" source="8-5xsOOrjlFsFQmB8Y6q-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="8-5xsOOrjlFsFQmB8Y6q-5">

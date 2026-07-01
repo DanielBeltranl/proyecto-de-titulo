@@ -6,20 +6,85 @@ on:
   workflow_dispatch:
     inputs:
       job:
-        description: "restart-lab: reopen AWS lab session | deploy: force deploy without push"
+        description: "restart-lab: reopen AWS lab session | deploy: force deploy without push | backup-db: dump prod DB"
         required: true
         default: restart-lab
         type: choice
         options:
           - restart-lab
           - deploy
+          - backup-db
 
 # ──────────────────────────────────────────────
-# PUSH TO MAIN → build + push ECR + deploy EC2
+# PUSH TO MAIN → run tests → build + push ECR + deploy EC2
 # ──────────────────────────────────────────────
 jobs:
+  test:
+    name: Run Tests
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.job == 'deploy')
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: tennisapp
+          POSTGRES_USER: tennisapp
+          POSTGRES_PASSWORD: tennisapp
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U tennisapp -d tennisapp"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install backend dependencies
+        working-directory: Productos/TennisApp-back
+        run: pip install -r requirements.txt
+
+      - name: Run backend tests (pytest)
+        working-directory: Productos/TennisApp-back
+        env:
+          DB_NAME: tennisapp
+          DB_USER: tennisapp
+          DB_PASSWORD: tennisapp
+          DB_HOST: localhost
+          DB_PORT: 5432
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+        run: pytest
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: Productos/ProyectoTitulo-Front/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: Productos/ProyectoTitulo-Front
+        run: npm ci
+
+      - name: Run frontend tests (vitest)
+        working-directory: Productos/ProyectoTitulo-Front
+        run: npm run test
+
   deploy:
     name: Build & Deploy
+    needs: test
     if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.job == 'deploy')
     runs-on: ubuntu-latest
 
@@ -144,6 +209,68 @@ jobs:
             --instance-ids ${{ vars.FRONT_INSTANCE_ID }} \
             --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
           echo "App disponible en: http://$PUBLIC_IP"
+
+  # ──────────────────────────────────────────────
+  # BACKUP DB → dump del Postgres de producción (EC2-Back)
+  # ──────────────────────────────────────────────
+  backup-db:
+    name: Backup Production DB
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.job == 'backup-db'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Dump production DB via SSM
+        run: |
+          SCRIPT=$(cat << 'EOF'
+          #!/bin/bash
+          set -e
+          TS=$(date +%Y%m%d_%H%M%S)
+          mkdir -p /opt/tennisapp/backups
+          FILE="/opt/tennisapp/backups/backup_${TS}.sql"
+
+          /usr/local/bin/docker-compose -f /opt/tennisapp/docker-compose.yml exec -T db \
+            pg_dump -U tennisapp -d tennisapp > "$FILE"
+
+          echo "Backup creado: $FILE"
+          ls -lh "$FILE"
+
+          echo "--- Verificación de contenido (conteo de filas por tabla clave) ---"
+          /usr/local/bin/docker-compose -f /opt/tennisapp/docker-compose.yml exec -T db \
+            psql -U tennisapp -d tennisapp -c "SELECT relname AS tabla, n_live_tup AS filas FROM pg_stat_user_tables ORDER BY relname;"
+
+          echo "--- Últimos 5 backups conservados ---"
+          ls -1t /opt/tennisapp/backups/*.sql | tail -n +6 | xargs -r rm --
+          ls -lh /opt/tennisapp/backups/
+          EOF
+          )
+          B64=$(printf '%s' "$SCRIPT" | base64 -w 0)
+
+          CMD=$(aws ssm send-command \
+            --instance-ids ${{ vars.BACK_INSTANCE_ID }} \
+            --document-name "AWS-RunShellScript" \
+            --parameters "commands=[\"echo $B64 | base64 -d | bash\"]" \
+            --query "Command.CommandId" --output text)
+
+          echo "SSM backup cmd: $CMD"
+          for i in $(seq 1 24); do
+            STATUS=$(aws ssm get-command-invocation \
+              --command-id "$CMD" --instance-id ${{ vars.BACK_INSTANCE_ID }} \
+              --query "Status" --output text 2>/dev/null || echo "Pending")
+            echo "[$i] $STATUS"
+            [[ "$STATUS" == "Success" || "$STATUS" == "Failed" ]] && break
+            sleep 5
+          done
+          aws ssm get-command-invocation \
+            --command-id "$CMD" --instance-id ${{ vars.BACK_INSTANCE_ID }} \
+            --query "{Status:Status,Output:StandardOutputContent,Error:StandardErrorContent}" --output table
 
   # ──────────────────────────────────────────────
   # RESTART LAB → start EC2s + sync IPs

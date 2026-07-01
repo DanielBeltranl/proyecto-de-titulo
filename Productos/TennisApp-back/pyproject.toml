@@ -12,7 +12,8 @@ dependencies = [
 ]
 
 [tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "back.settings"
 pythonpath = ["."]
-python_files = ["test_*.py"]
+python_files = ["test_*.py", "tests.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
