@@ -38,14 +38,19 @@ def make_point(
     break_chance=False,
     is_guest=False,
     guest_serving=False,
+    match_point_p1=False,
+    match_point_p2=False,
     dt=T0,
 ):
     return SimpleNamespace(
         winner_id_id=PLAYER_ID if won else OPPONENT_ID,
+        id_player_1_id=PLAYER_ID,
         id_player_2_id=None if is_guest else OPPONENT_ID,
         duration=duration,
         is_serving_id=serving,
         break_point_chance=break_chance,
+        match_point_p1=match_point_p1,
+        match_point_p2=match_point_p2,
         id_game=SimpleNamespace(guest_is_serving=guest_serving),
         created_at=dt,
     )
@@ -400,7 +405,7 @@ class TestGetMatchStats:
         result = get_match_stats([], PLAYER_ID, make_score(), 'Amateur', 'Masculino', 'Clay')
         assert set(result.keys()) == {
             'match_duration', 'points_win_loss', 'avg_duration_won',
-            'avg_duration_lost', 'break_points', 'total_distance',
+            'avg_duration_lost', 'break_points', 'match_points', 'total_distance',
             'quartiles', 'points_per_interval', 'distance_per_interval',
         }
         assert result['avg_duration_won'] is None
