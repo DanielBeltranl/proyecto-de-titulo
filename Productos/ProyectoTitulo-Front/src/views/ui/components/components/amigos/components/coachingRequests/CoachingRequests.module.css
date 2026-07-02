@@ -71,7 +71,9 @@
 .rejectBtn {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.35rem;
+  min-height: 2.75rem;
   padding: 0.5rem 0.9rem;
   border-radius: 0.375rem;
   font-size: 0.8rem;

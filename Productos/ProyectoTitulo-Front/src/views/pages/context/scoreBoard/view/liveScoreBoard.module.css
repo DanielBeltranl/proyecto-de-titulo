@@ -58,6 +58,7 @@
     justify-content: center;
     gap: 1rem;
     min-height: 100vh;
+    min-height: 100dvh;
     color: #a08e7a;
     font-family: 'Manrope', sans-serif;
 }

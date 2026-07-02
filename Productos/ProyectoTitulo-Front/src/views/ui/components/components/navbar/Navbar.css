@@ -56,8 +56,11 @@
   color: #d8c3ad;
   background: none;
   border: none;
-  width: 2rem;
-  height: 2rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: color 0.2s ease;
 }
@@ -245,7 +248,8 @@
 
   .top-navbar__auth-button {
     font-size: 0.75rem;
-    padding: 0.375rem 0.75rem;
+    padding: 0.75rem 0.75rem;
+    min-height: 2.75rem;
   }
 }
 

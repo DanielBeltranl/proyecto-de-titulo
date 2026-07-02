@@ -49,7 +49,7 @@
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 0.5rem;
+  gap: 1.5rem;
 }
 
 .dot {
@@ -61,6 +61,19 @@
   cursor: pointer;
   padding: 0;
   transition: background 0.3s ease, transform 0.3s ease;
+  position: relative;
+}
+
+/* Enlarge the tappable area without changing the visible dot size or
+   overlapping neighboring dots (gap above is sized to match) */
+.dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2rem;
+  height: 2rem;
+  transform: translate(-50%, -50%);
 }
 
 .dotActive {
