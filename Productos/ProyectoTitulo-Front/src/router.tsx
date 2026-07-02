@@ -18,6 +18,7 @@ import { MatchStats } from "./views/pages/context/matchStats/view/MatchStats.tsx
 import { GlobalStats } from "./views/pages/context/globalStats/view/GlobalStats.tsx"
 import VistaHistorial from "./views/ui/components/pages/VistaHistorial/VistaHistorial.tsx"
 import UserProfile from "./views/ui/components/components/userInfo/Jugador/UserInfo.tsx"
+import QrLogin from "./views/pages/context/qrLogin/view/QrLogin.tsx"
 
 // Rutas públicas - con Background
 
@@ -60,6 +61,7 @@ export const AppRouter = () => {
       <Route path="register/jugador" element={<RegisterJugador />} />
       <Route path="register/entrenador" element={<RegisterEntrenador />} />
       <Route path="login" element={<Login />} />
+      <Route path="qr-login/:token" element={<QrLogin />} />
 
       {/* Rutas protegidas */}
       <Route

@@ -2,8 +2,9 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
 from rest_framework_simplejwt.settings import api_settings
 from rest_framework import permissions
 from django.utils import timezone
@@ -14,7 +15,26 @@ from .serializer import (
     EntrenadorRegistroSerializer,
     TokenObtainPairSerializerPersonalizado,
 )
-from .models import Usuario, TokenSession, RolUsuario
+from .models import Usuario, TokenSession, QRLoginToken, RolUsuario
+
+
+def emitir_sesion(usuario, request):
+    """Emite un par de tokens JWT para el usuario y registra su TokenSession, desactivando las anteriores."""
+    refresh = TokenObtainPairSerializerPersonalizado.get_token(usuario)
+    access_str = str(refresh.access_token)
+    refresh_str = str(refresh)
+
+    TokenSession.objects.filter(usuario=usuario, is_active=True).update(is_active=False)
+    TokenSession.objects.create(
+        usuario=usuario,
+        access_token=access_str,
+        refresh_token=refresh_str,
+        expires_at=timezone.now() + api_settings.ACCESS_TOKEN_LIFETIME,
+        ip_address=request.META.get('REMOTE_ADDR'),
+        user_agent=request.META.get('HTTP_USER_AGENT', '')[:255],
+        is_active=True,
+    )
+    return {"access": access_str, "refresh": refresh_str}
 
 
 class TokenObtainPairViewPersonalizado(TokenObtainPairView):
@@ -25,27 +45,30 @@ class TokenObtainPairViewPersonalizado(TokenObtainPairView):
 
         if response.status_code == 200:
             access_str = response.data.get('access')
-            refresh_str = response.data.get('refresh')
-
-            from rest_framework_simplejwt.tokens import AccessToken
             user_id = AccessToken(access_str).get('user_id')
 
             try:
                 usuario = Usuario.objects.get(id=user_id)
-                TokenSession.objects.filter(usuario=usuario, is_active=True).update(is_active=False)
-                TokenSession.objects.create(
-                    usuario=usuario,
-                    access_token=access_str,
-                    refresh_token=refresh_str,
-                    expires_at=timezone.now() + api_settings.ACCESS_TOKEN_LIFETIME,
-                    ip_address=request.META.get('REMOTE_ADDR'),
-                    user_agent=request.META.get('HTTP_USER_AGENT', '')[:255],
-                    is_active=True,
-                )
+                response.data.update(emitir_sesion(usuario, request))
             except Usuario.DoesNotExist:
                 pass
 
         return response
+
+
+class QRLoginView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, token):
+        try:
+            qr_token = QRLoginToken.objects.get(token=token)
+        except QRLoginToken.DoesNotExist:
+            return Response({"detail": "Token inválido."}, status=status.HTTP_404_NOT_FOUND)
+
+        if not qr_token.is_valid():
+            return Response({"detail": "Token expirado."}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(emitir_sesion(qr_token.usuario, request), status=status.HTTP_200_OK)
 
 
 _SERIALIZER_POR_ROL = {

@@ -64,20 +64,17 @@ export const registrarUsuario = async (datos: UsuarioData) => {
     return await api.post<TokenResponse>('/usuarios/registro/', datos);
 };
 
-// LOGIN
-export const loginUsuario = async (datos: LoginData) => {
-    const response = await api.post<TokenResponse>('/login/', datos);
-    
-    // Guardar tokens en sessionStorage
-    sessionStorage.setItem('access_token', response.data.access);
-    sessionStorage.setItem('refresh_token', response.data.refresh);
-    
+// Guarda tokens y usuario en sessionStorage a partir de un par access/refresh
+export const guardarSesionDesdeTokens = (access: string, refresh: string, usuario?: UsuarioAuth) => {
+    sessionStorage.setItem('access_token', access);
+    sessionStorage.setItem('refresh_token', refresh);
+
     // Si el backend devuelve usuario, usarlo
-    if (response.data.usuario) {
-        sessionStorage.setItem('usuario', JSON.stringify(response.data.usuario));
+    if (usuario) {
+        sessionStorage.setItem('usuario', JSON.stringify(usuario));
     } else {
         // Si no, decodificar el token y extraer usuario
-        const decodedToken = decodeToken(response.data.access);
+        const decodedToken = decodeToken(access);
         if (decodedToken) {
             const usuarioFromToken: UsuarioAuth = {
                 id: decodedToken.user_id ? parseInt(decodedToken.user_id) : 0,
@@ -92,11 +89,32 @@ export const loginUsuario = async (datos: LoginData) => {
                 peso: null,
                 sexo: decodedToken.sexo || null,
             };
-            
+
             sessionStorage.setItem('usuario', JSON.stringify(usuarioFromToken));
         }
     }
-    
+};
+
+// LOGIN
+export const loginUsuario = async (datos: LoginData) => {
+    const response = await api.post<TokenResponse>('/login/', datos);
+
+    guardarSesionDesdeTokens(response.data.access, response.data.refresh, response.data.usuario);
+
+    return response;
+};
+
+// LOGIN VIA QR
+export interface QrLoginResponse {
+    access: string;
+    refresh: string;
+}
+
+export const loginConQr = async (token: string) => {
+    const response = await api.post<QrLoginResponse>(`/qr-login/${token}/`);
+
+    guardarSesionDesdeTokens(response.data.access, response.data.refresh);
+
     return response;
 };
 

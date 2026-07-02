@@ -140,12 +140,14 @@ jobs:
           set -e
           aws ecr get-login-password --region us-east-1 | \
             docker login --username AWS --password-stdin ECR_PLACEHOLDER
+          export FRONTEND_BASE_URL="http://FRONT_IP_PLACEHOLDER"
           /usr/local/bin/docker-compose -f /opt/tennisapp/docker-compose.yml pull web
           /usr/local/bin/docker-compose -f /opt/tennisapp/docker-compose.yml up -d --no-deps web
           echo "Backend updated OK"
           EOF
           )
           SCRIPT="${SCRIPT//ECR_PLACEHOLDER/${{ vars.ECR_REGISTRY }}}"
+          SCRIPT="${SCRIPT//FRONT_IP_PLACEHOLDER/${{ vars.FRONT_PUBLIC_IP }}}"
           B64=$(printf '%s' "$SCRIPT" | base64 -w 0)
 
           CMD=$(aws ssm send-command \
@@ -296,6 +298,8 @@ jobs:
             python manage.py seed_demo
           /usr/local/bin/docker-compose -f /opt/tennisapp/docker-compose.yml exec -T web \
             python manage.py seed_pvp_matches
+          /usr/local/bin/docker-compose -f /opt/tennisapp/docker-compose.yml exec -T web \
+            python manage.py generate_qr_logins
           EOF
           )
           B64=$(printf '%s' "$SCRIPT" | base64 -w 0)

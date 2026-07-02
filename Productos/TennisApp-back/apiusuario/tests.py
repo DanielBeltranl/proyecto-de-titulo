@@ -13,16 +13,16 @@ class SeedDemoCommandTests(TestCase):
         call_command('seed_demo')
         call_command('seed_demo')
 
-        self.assertEqual(Usuario.objects.count(), 12)
+        self.assertEqual(Usuario.objects.count(), 18)
 
-    def test_creates_two_coaches_and_ten_players_five_each(self):
+    def test_creates_three_coaches_and_fifteen_players_five_each(self):
         call_command('seed_demo')
 
         coaches = Usuario.objects.filter(rol=RolUsuario.entrenador)
         players = Usuario.objects.filter(rol=RolUsuario.jugador)
 
-        self.assertEqual(coaches.count(), 2)
-        self.assertEqual(players.count(), 10)
+        self.assertEqual(coaches.count(), 3)
+        self.assertEqual(players.count(), 15)
 
         for coach in coaches:
             self.assertEqual(players.filter(entrenador=coach).count(), 5)

@@ -22,9 +22,14 @@ COACHES = [
         'correo': 'coach.maria@tennis.app', 'sexo': SexoUsuario.femenino,
         'fecha_nacimiento': date(1975, 7, 22),
     },
+    {
+        'nombre': 'Rodrigo', 'apellidoPaterno': 'Espinoza', 'apellidoMaterno': 'Bravo',
+        'correo': 'coach.rodrigo@tennis.app', 'sexo': SexoUsuario.masculino,
+        'fecha_nacimiento': date(1982, 11, 9),
+    },
 ]
 
-# coach_idx: 0 = Carlos, 1 = María
+# coach_idx: 0 = Carlos, 1 = María, 2 = Rodrigo
 PLAYERS = [
     # -- Carlos --
     {
@@ -87,6 +92,37 @@ PLAYERS = [
         'correo': 'isabella.morales@tennis.app', 'sexo': SexoUsuario.femenino,
         'fecha_nacimiento': date(1990, 7, 15), 'nivelUsuario': NivelUsuario.pro,
         'altura': 170, 'peso': 62, 'coach_idx': 1,
+    },
+    # -- Rodrigo --
+    {
+        'nombre': 'Martina', 'apellidoPaterno': 'Silva', 'apellidoMaterno': 'Contreras',
+        'correo': 'martina.silva@tennis.app', 'sexo': SexoUsuario.femenino,
+        'fecha_nacimiento': date(1995, 3, 12), 'nivelUsuario': NivelUsuario.amateur,
+        'altura': 166, 'peso': 59, 'coach_idx': 2,
+    },
+    {
+        'nombre': 'Benjamín', 'apellidoPaterno': 'Muñoz', 'apellidoMaterno': 'Araya',
+        'correo': 'benjamin.munoz@tennis.app', 'sexo': SexoUsuario.masculino,
+        'fecha_nacimiento': date(1993, 10, 2), 'nivelUsuario': NivelUsuario.semipro,
+        'altura': 181, 'peso': 79, 'coach_idx': 2,
+    },
+    {
+        'nombre': 'Fernanda', 'apellidoPaterno': 'Rivas', 'apellidoMaterno': 'Godoy',
+        'correo': 'fernanda.rivas@tennis.app', 'sexo': SexoUsuario.femenino,
+        'fecha_nacimiento': date(1997, 8, 27), 'nivelUsuario': NivelUsuario.amateur,
+        'altura': 163, 'peso': 56, 'coach_idx': 2,
+    },
+    {
+        'nombre': 'Joaquín', 'apellidoPaterno': 'Fuentes', 'apellidoMaterno': 'Leiva',
+        'correo': 'joaquin.fuentes@tennis.app', 'sexo': SexoUsuario.masculino,
+        'fecha_nacimiento': date(1990, 1, 19), 'nivelUsuario': NivelUsuario.pro,
+        'altura': 186, 'peso': 83, 'coach_idx': 2,
+    },
+    {
+        'nombre': 'Antonia', 'apellidoPaterno': 'Carrasco', 'apellidoMaterno': 'Paredes',
+        'correo': 'antonia.carrasco@tennis.app', 'sexo': SexoUsuario.femenino,
+        'fecha_nacimiento': date(1994, 6, 5), 'nivelUsuario': NivelUsuario.semipro,
+        'altura': 169, 'peso': 61, 'coach_idx': 2,
     },
 ]
 
