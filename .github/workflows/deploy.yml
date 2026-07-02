@@ -206,10 +206,7 @@ jobs:
 
       - name: App URL
         run: |
-          PUBLIC_IP=$(aws ec2 describe-instances \
-            --instance-ids ${{ vars.FRONT_INSTANCE_ID }} \
-            --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
-          echo "App disponible en: http://$PUBLIC_IP"
+          echo "App disponible en: http://${{ vars.FRONT_PUBLIC_IP }}"
 
   # ──────────────────────────────────────────────
   # BACKUP DB → dump del Postgres de producción (EC2-Back)
@@ -366,20 +363,16 @@ jobs:
             done
           done
 
-      - name: Get new IPs
+      - name: Get new back IP
         id: ips
         run: |
           BACK_PRIVATE=$(aws ec2 describe-instances \
             --instance-ids ${{ vars.BACK_INSTANCE_ID }} \
             --query "Reservations[0].Instances[0].PrivateIpAddress" --output text)
-          FRONT_PUBLIC=$(aws ec2 describe-instances \
-            --instance-ids ${{ vars.FRONT_INSTANCE_ID }} \
-            --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
 
           echo "back_private=$BACK_PRIVATE" >> $GITHUB_OUTPUT
-          echo "front_public=$FRONT_PUBLIC" >> $GITHUB_OUTPUT
           echo "EC2-Back private IP: $BACK_PRIVATE"
-          echo "EC2-Front public IP: $FRONT_PUBLIC"
+          echo "EC2-Front public IP (Elastic IP, fija): ${{ vars.FRONT_PUBLIC_IP }}"
 
       - name: Restart frontend with new backend IP
         run: |
@@ -418,4 +411,4 @@ jobs:
       - name: Lab listo
         run: |
           echo "Lab restaurado."
-          echo "App en: http://${{ steps.ips.outputs.front_public }}"
+          echo "App en: http://${{ vars.FRONT_PUBLIC_IP }}"
