@@ -293,13 +293,18 @@ jobs:
         run: |
           SCRIPT=$(cat << 'EOF'
           #!/bin/bash
-          set -e
+          echo "=== seed_demo ==="
           /usr/local/bin/docker-compose -f /opt/tennisapp/docker-compose.yml exec -T web \
-            python manage.py seed_demo
+            python manage.py seed_demo 2>&1
+          echo "exit: $?"
+          echo "=== seed_pvp_matches ==="
           /usr/local/bin/docker-compose -f /opt/tennisapp/docker-compose.yml exec -T web \
-            python manage.py seed_pvp_matches
+            python manage.py seed_pvp_matches 2>&1
+          echo "exit: $?"
+          echo "=== generate_qr_logins ==="
           /usr/local/bin/docker-compose -f /opt/tennisapp/docker-compose.yml exec -T web \
-            python manage.py generate_qr_logins
+            python manage.py generate_qr_logins 2>&1
+          echo "exit: $?"
           EOF
           )
           B64=$(printf '%s' "$SCRIPT" | base64 -w 0)
