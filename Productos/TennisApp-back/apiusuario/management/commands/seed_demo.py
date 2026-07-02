@@ -20,51 +20,59 @@ class Command(BaseCommand):
     )
 
     def handle(self, *args, **kwargs):
-        if Usuario.objects.filter(correo=COACHES[0]['correo']).exists():
+        coaches, new_coaches = self._get_or_create_coaches()
+        players, new_players = self._get_or_create_players(coaches)
+
+        if not new_coaches and not new_players:
             self.stdout.write(self.style.WARNING('Seed data already exists. Skipping.'))
             return
 
         with transaction.atomic():
-            coaches = self._create_coaches()
-            players = self._create_players(coaches)
-            self._create_associations(players)
-            self._create_matches(players)
+            if new_players:
+                self._create_associations(new_players)
+                self._create_matches(new_players)
 
         self.stdout.write(self.style.SUCCESS(
-            f'Done: {len(coaches)} coaches, {len(players)} players, {len(players)} matches.'
+            f'Done: {len(new_coaches)} new coaches, {len(new_players)} new players.'
         ))
 
-    # -- Creators --
+    # -- Creators (idempotentes por correo) --
 
-    def _create_coaches(self):
-        coaches = []
+    def _get_or_create_coaches(self):
+        coaches, new_coaches = [], []
         for d in COACHES:
-            u = Usuario(
-                rol=RolUsuario.entrenador,
-                nombre=d['nombre'], apellidoPaterno=d['apellidoPaterno'],
-                apellidoMaterno=d['apellidoMaterno'], correo=d['correo'],
-                sexo=d['sexo'], fecha_nacimiento=d['fecha_nacimiento'],
-            )
-            u.set_password(DEMO_PASSWORD)
-            u.save()
+            u = Usuario.objects.filter(correo=d['correo']).first()
+            if u is None:
+                u = Usuario(
+                    rol=RolUsuario.entrenador,
+                    nombre=d['nombre'], apellidoPaterno=d['apellidoPaterno'],
+                    apellidoMaterno=d['apellidoMaterno'], correo=d['correo'],
+                    sexo=d['sexo'], fecha_nacimiento=d['fecha_nacimiento'],
+                )
+                u.set_password(DEMO_PASSWORD)
+                u.save()
+                new_coaches.append(u)
             coaches.append(u)
-        return coaches
+        return coaches, new_coaches
 
-    def _create_players(self, coaches):
-        players = []
+    def _get_or_create_players(self, coaches):
+        players, new_players = [], []
         for d in PLAYERS:
-            u = Usuario(
-                rol=RolUsuario.jugador,
-                nombre=d['nombre'], apellidoPaterno=d['apellidoPaterno'],
-                apellidoMaterno=d['apellidoMaterno'], correo=d['correo'],
-                sexo=d['sexo'], fecha_nacimiento=d['fecha_nacimiento'],
-                nivelUsuario=d['nivelUsuario'], altura=d['altura'], peso=d['peso'],
-                entrenador=coaches[d['coach_idx']],
-            )
-            u.set_password(DEMO_PASSWORD)
-            u.save()
+            u = Usuario.objects.filter(correo=d['correo']).first()
+            if u is None:
+                u = Usuario(
+                    rol=RolUsuario.jugador,
+                    nombre=d['nombre'], apellidoPaterno=d['apellidoPaterno'],
+                    apellidoMaterno=d['apellidoMaterno'], correo=d['correo'],
+                    sexo=d['sexo'], fecha_nacimiento=d['fecha_nacimiento'],
+                    nivelUsuario=d['nivelUsuario'], altura=d['altura'], peso=d['peso'],
+                    entrenador=coaches[d['coach_idx']],
+                )
+                u.set_password(DEMO_PASSWORD)
+                u.save()
+                new_players.append(u)
             players.append(u)
-        return players
+        return players, new_players
 
     def _create_associations(self, players):
         for p in players:

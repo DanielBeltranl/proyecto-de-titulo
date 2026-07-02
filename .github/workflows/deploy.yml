@@ -133,6 +133,23 @@ jobs:
           cache-from: type=gha,scope=back
           cache-to: type=gha,scope=back,mode=max
 
+      - name: Sync docker-compose.yml to EC2
+        run: |
+          COMPOSE_B64=$(base64 -w 0 Productos/TennisApp-back/docker-compose.yml)
+          CMD=$(aws ssm send-command \
+            --instance-ids ${{ vars.BACK_INSTANCE_ID }} \
+            --document-name "AWS-RunShellScript" \
+            --parameters "commands=[\"echo $COMPOSE_B64 | base64 -d > /opt/tennisapp/docker-compose.yml\"]" \
+            --query "Command.CommandId" --output text)
+          for i in $(seq 1 12); do
+            STATUS=$(aws ssm get-command-invocation \
+              --command-id "$CMD" --instance-id ${{ vars.BACK_INSTANCE_ID }} \
+              --query "Status" --output text 2>/dev/null || echo "Pending")
+            [[ "$STATUS" == "Success" || "$STATUS" == "Failed" ]] && break
+            sleep 5
+          done
+          echo "docker-compose.yml sync: $STATUS"
+
       - name: Deploy backend via SSM
         run: |
           SCRIPT=$(cat << 'EOF'
