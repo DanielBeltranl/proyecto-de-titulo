@@ -3,15 +3,12 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 import { type UserInfo, userInfoSchema } from "../model/userDataValidator.ts";
 import styles from "./formValidator.module.css";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
-
 import { CustomInput } from "../components/customInput/customInput.tsx";
 import { SubmitButtonComponent } from "../components/submitButtomComponent/submitButtomComponent.tsx";
 import { SuccessModal } from "../components/successModal/SuccessModal.tsx";
 import { registrarUsuario } from "../../../../../services/usuarioService.js";
 
 export const FormEntrenador = () => {
-    const navigate = useNavigate();
     const [apiError, setApiError] = useState<string | null>(null);
     const [showSuccess, setShowSuccess] = useState(false);
 

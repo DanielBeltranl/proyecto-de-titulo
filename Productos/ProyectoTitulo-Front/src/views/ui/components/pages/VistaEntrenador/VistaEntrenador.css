@@ -41,6 +41,10 @@
   .trainer-grid {
     grid-template-columns: 1fr;
   }
+
+  .trainer-side-column {
+    order: -1;
+  }
 }
 
 /* ─── Info Section ──────────────────────────────────────────────── */

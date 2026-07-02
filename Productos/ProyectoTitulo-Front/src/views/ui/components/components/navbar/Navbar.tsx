@@ -131,7 +131,7 @@ function Navbar({
                   <div className="top-navbar__profile-dropdown">
                     <button
                       className="top-navbar__dropdown-link"
-                      onClick={() => handleNavigation('/vista')}
+                      onClick={() => handleNavigation('/perfil')}
                     >
                       👤 Ver Perfil
                     </button>
@@ -140,12 +140,6 @@ function Navbar({
                       onClick={() => handleNavigation('/historial')}
                     >
                       📚 Historial
-                    </button>
-                    <button
-                      className="top-navbar__dropdown-link"
-                      onClick={() => handleNavigation('/cambiar-password')}
-                    >
-                      🔑 Cambiar Contraseña
                     </button>
                     <button
                       className="top-navbar__dropdown-link top-navbar__logout-link"
@@ -226,18 +220,6 @@ function Navbar({
                   onClick={() => handleNavigation('/perfil')}
                 >
                   👤 Mi Perfil
-                </button>
-                <button
-                  className="top-navbar__mobile-option"
-                  onClick={() => handleNavigation('/sesiones')}
-                >
-                  🔐 Mis Sesiones
-                </button>
-                <button
-                  className="top-navbar__mobile-option"
-                  onClick={() => handleNavigation('/cambiar-password')}
-                >
-                  🔑 Cambiar Contraseña
                 </button>
                 <button
                   className="top-navbar__mobile-option top-navbar__mobile-logout"

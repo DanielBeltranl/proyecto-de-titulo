@@ -101,7 +101,7 @@ export const verifyToken = async (token?: string) => {
         });
 
         return true;
-    } catch (error) {
+    } catch {
         clearTokens();
         return false;
     }

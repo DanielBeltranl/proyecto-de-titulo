@@ -17,6 +17,7 @@ import Inicio from "./views/pages/context/inicio/view/Inicio.tsx"
 import { MatchStats } from "./views/pages/context/matchStats/view/MatchStats.tsx"
 import { GlobalStats } from "./views/pages/context/globalStats/view/GlobalStats.tsx"
 import VistaHistorial from "./views/ui/components/pages/VistaHistorial/VistaHistorial.tsx"
+import UserProfile from "./views/ui/components/components/userInfo/Jugador/UserInfo.tsx"
 
 // Rutas públicas - con Background
 
@@ -46,10 +47,7 @@ const Login = () => (
 
 const Perfil = () => (
   <Background>
-    <div style={{ padding: '2rem', color: '#fff' }}>
-      <h1>Mi Perfil</h1>
-      <p>Gestiona tu perfil aquí</p>
-    </div>
+    <UserProfile />
   </Background>
 )
 

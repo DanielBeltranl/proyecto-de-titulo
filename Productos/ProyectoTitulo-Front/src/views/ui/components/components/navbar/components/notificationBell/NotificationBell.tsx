@@ -6,10 +6,7 @@ import {
   marcarNotificacionLeida,
   marcarTodasNotificacionesLeidas,
 } from '../../../../../../../services/usuarioService';
-import {
-  connectNotifications,
-  disconnectNotifications,
-} from '../../../../../../../services/notificationSocket';
+import { connectNotifications } from '../../../../../../../services/notificationSocket';
 import styles from './NotificationBell.module.css';
 
 interface NotifPayload {

@@ -82,7 +82,7 @@ const HistorialCard: React.FC<HistorialCardProps> = ({ match }) => {
             </span>
             {s.games.length > 0 && (
               <span className="historial-games">
-                ({s.games.map((g, gi) => `${g.p1_game_final_score}-${g.p2_game_final_score}`).join(', ')})
+                ({s.games.map((g) => `${g.p1_game_final_score}-${g.p2_game_final_score}`).join(', ')})
               </span>
             )}
           </div>

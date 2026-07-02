@@ -1,6 +1,7 @@
-/* Global Font */
+/* Global Font + box model reset */
 * {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    box-sizing: border-box;
 }
 
 body, html {

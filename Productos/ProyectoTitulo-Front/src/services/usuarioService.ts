@@ -153,26 +153,6 @@ export const refrescarToken = async () => {
     return response;
 };
 
-// OBTENER PERFIL DEL USUARIO
-export const obtenerPerfil = async () => {
-    return await api.get<UsuarioAuth>('/usuarios/perfil/');
-};
-
-// OBTENER SESIONES ACTIVAS
-export const obtenerSesionesActivas = async () => {
-    return await api.get('/usuarios/sesiones_activas/');
-};
-
-// CAMBIAR CONTRASEÑA
-export const cambiarPassword = async (datos: { password_actual: string; password_nueva: string }) => {
-    return await api.post('/usuarios/cambiar_password/', datos);
-};
-
-// CAMBIAR FOTO DE PERFIL
-export const cambiarFotoPerfil = async (fotoPerfil: string) => {
-    return await api.post('/usuarios/cambiar_fotoperfil/', { fotoPerfil });
-};
-
 // GESTIÓN DE AMIGOS - Según API Reference
 export const buscarJugadores = async (term: string) => {
     return await api.get('/players/search/', { params: { term } });

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { AxiosError } from "axios";
 import api from "../../../../../../api/axios";
+import { CoachStudentsStat } from "./entrenador/CoachStudentsStat";
 
 import "./UserInfo.css";
 
@@ -13,6 +14,7 @@ interface UserData {
   altura: number;
   peso: number;
   sexo: string;
+  rol: string;
   nivelUsuario: string;
   correo: string;
   fotoPerfil?: string;
@@ -80,7 +82,8 @@ export const UserProfile = () => {
   if (error) return <div className="user-card">Error: {error}</div>;
   if (!userData) return null;
 
-  const { nombre, apellidoPaterno, fecha_nacimiento, peso, nivelUsuario, fotoPerfil } = userData;
+  const { nombre, apellidoPaterno, fecha_nacimiento, peso, rol, nivelUsuario, fotoPerfil } = userData;
+  const esEntrenador = rol === "Entrenador";
   const edad = calcularEdad(fecha_nacimiento);
 
   return (
@@ -111,15 +114,19 @@ export const UserProfile = () => {
           <span className="stat__label">EDAD</span>
         </div>
     
-        <div className="stat">
-          <span className="stat__value">{peso}</span>
-          <span className="stat__label">PESO</span>
-        </div>
+        {esEntrenador ? (
+          <CoachStudentsStat />
+        ) : (
+          <div className="stat">
+            <span className="stat__value">{peso}</span>
+            <span className="stat__label">PESO</span>
+          </div>
+        )}
       </div>
 
       {/* Coach Info */}
       <div className="user-card__coach">
-        {nivelUsuario === "Entrenador" ? (
+        {esEntrenador ? (
           <>
             <span className="coach__name">{nombre} {apellidoPaterno}</span>
             <span className="coach__label">ENTRENADOR</span>

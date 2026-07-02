@@ -1,4 +1,3 @@
-import api from '../../../../../api/axios';
 import { obtenerEstadisticasPartido, obtenerDatosPartido, obtenerDetallePartido } from '../../../../../services/usuarioService';
 
 // --- Raw API types ---
