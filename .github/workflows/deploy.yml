@@ -319,9 +319,14 @@ jobs:
             [[ "$STATUS" == "Success" || "$STATUS" == "Failed" ]] && break
             sleep 5
           done
+          echo "--- STDOUT ---"
           aws ssm get-command-invocation \
             --command-id "$CMD" --instance-id ${{ vars.BACK_INSTANCE_ID }} \
-            --query "{Status:Status,Output:StandardOutputContent,Error:StandardErrorContent}" --output table
+            --query "StandardOutputContent" --output text
+          echo "--- STDERR ---"
+          aws ssm get-command-invocation \
+            --command-id "$CMD" --instance-id ${{ vars.BACK_INSTANCE_ID }} \
+            --query "StandardErrorContent" --output text
 
   # ──────────────────────────────────────────────
   # RESTART LAB → start EC2s + sync IPs
